@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Is Domesday Destiny?</title>
+<meta name="description" content="Does a place's size in 1086 still predict its size today? Every Domesday place mapped against the 2021 census, parish by parish.">
+<meta property="og:title" content="Is Domesday Destiny?">
+<meta property="og:description" content="{{parish_main.n|int}} parishes, 1086 to 2021. Size in Domesday Book barely predicts size today.">
+<meta property="og:image" content="https://tristan-hotham.github.io/domesday-destiny/header.png">
+<meta property="og:url" content="https://tristan-hotham.github.io/domesday-destiny/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800;9..144,900&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<style>
+/* Old-survey paper. Warm = grew less than the typical parish (or shrank). Cool = grew more. Gold = size in 1086. */
+:root{
+  --bg:#F3EEE2; --panel:#EAE3D2; --fg:#1D1A15; --muted:#6B6457; --rule:#D8D0BE; --card:#FBF8F1; --border:#C9BFA9;
+  --hot:#D9480F; --moss:#4D7A2E; --plum:#8E3E9E; --blue:#2763A8; --gold:#A87400;
+  --g0:#9B3018; --g1:#D9733F; --g2:#E3A276; --g3:#8DB2CF; --g4:#3F7DB8; --g5:#1D4B80; --gn:#A39A86;
+  --s1:#E6D3A0; --s2:#D3AE52; --s3:#A87400; --s4:#7A5200; --s5:#4A3000;
+  --display:"Fraunces",Georgia,"Times New Roman",serif;
+  --body:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#15140F; --panel:#1F1D17; --fg:#EDE8DC; --muted:#A59E8E; --rule:#36332A; --card:#211F19; --border:#48443A;
+  --hot:#F26A30; --moss:#7FAE58; --plum:#C27BD3; --blue:#6E9FE0; --gold:#D6A136;
+  --g0:#FF6A3D; --g1:#E88A55; --g2:#B98A68; --g3:#6E93B5; --g4:#5A9BE0; --g5:#8CC4FF; --gn:#6E685A;
+  --s1:#5A4A22; --s2:#8C6E22; --s3:#C08F25; --s4:#E2B24A; --s5:#FFD98A; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#15140F; --panel:#1F1D17; --fg:#EDE8DC; --muted:#A59E8E; --rule:#36332A; --card:#211F19; --border:#48443A;
+  --hot:#F26A30; --moss:#7FAE58; --plum:#C27BD3; --blue:#6E9FE0; --gold:#D6A136;
+  --g0:#FF6A3D; --g1:#E88A55; --g2:#B98A68; --g3:#6E93B5; --g4:#5A9BE0; --g5:#8CC4FF; --gn:#6E685A;
+  --s1:#5A4A22; --s2:#8C6E22; --s3:#C08F25; --s4:#E2B24A; --s5:#FFD98A; color-scheme:dark}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font:400 18px/1.62 var(--body);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));overflow-x:hidden}
+.wrap{max-width:680px;margin:0 auto;padding-block:28px 64px}
+.wrap .bleed{width:min(1080px,calc(100vw - 32px));margin-left:calc((100% - min(1080px,100vw - 32px))/2);margin-right:0}
+a{color:inherit;text-decoration-color:var(--hot);text-underline-offset:3px}
+.kicker{font:500 12px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.kicker b{background:var(--hot);color:#fff;padding:5px 8px;font-weight:500}
+header.hero{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px 24px;align-items:end;border-bottom:6px double var(--fg);padding-bottom:22px;margin-top:18px}
+h1{font:900 clamp(52px,13vw,112px)/.86 var(--display);letter-spacing:-.02em;margin:0;text-wrap:balance;font-variation-settings:"SOFT" 50}
+h1 em{font-style:normal;color:var(--hot)}
+.mark{width:clamp(84px,19vw,160px);height:auto;display:block}
+.dek{grid-column:1/-1;font-size:21px;line-height:1.42;margin:8px 0 0;max-width:44ch}
+.byline{font:400 13px/1.4 var(--mono);color:var(--muted);margin-top:14px}
+h2{font:800 34px/1.04 var(--display);letter-spacing:-.01em;margin:52px 0 10px;text-wrap:balance}
+h2 .n{font:500 13px/1 var(--mono);color:var(--hot);display:block;letter-spacing:.1em;margin-bottom:10px}
+h3{font:600 20px/1.25 var(--display);margin:28px 0 6px}
+p{margin:0 0 16px}
+.lede::first-letter{font:900 72px/.8 var(--display);float:left;margin:6px 10px 0 0;color:var(--hot)}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);margin:26px 0 8px}
+.stats div{background:var(--card);padding:14px 12px}
+.stats b{display:block;font:900 clamp(28px,6vw,40px)/1 var(--display);color:var(--fg)}
+.stats b.h{color:var(--hot)}
+.stats span{font:400 12px/1.35 var(--mono);color:var(--muted);display:block;margin-top:6px}
+@media (max-width:600px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.figure{margin:26px 0 30px}
+.fig-h{font:600 19px/1.25 var(--display);margin:0 0 4px}
+.fig-sub{font:400 13px/1.45 var(--mono);color:var(--muted);margin:0 0 12px}
+.src{font:400 12px/1.45 var(--mono);color:var(--muted);margin-top:10px}
+.chart{width:100%;position:relative}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+svg text{font-family:var(--mono);fill:var(--fg)}
+.lab{font-size:12px}.lab.m{fill:var(--muted)}.lab.b{font-weight:500}.lab.s{font-size:11px}
+.tip{position:absolute;pointer-events:none;background:var(--fg);color:var(--bg);font:400 12px/1.45 var(--mono);padding:8px 10px;border-radius:3px;max-width:270px;z-index:1000;transform:translate(-50%,calc(-100% - 12px));display:none}
+.tip b{font-weight:500}
+.controls{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:0 0 10px}
+.btn{font:500 12px/1 var(--mono);background:var(--card);color:var(--fg);border:1px solid var(--border);border-radius:3px;padding:8px 10px;cursor:pointer;min-height:36px}
+.btn[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.btn:focus-visible,input:focus-visible{outline:2px solid var(--hot);outline-offset:2px}
+.seg{display:inline-flex;border:1px solid var(--border);border-radius:3px;overflow:hidden;max-width:100%}
+.seg .btn{border:0;border-radius:0;border-right:1px solid var(--border)}
+.seg .btn:last-child{border-right:0}
+.searchbox{position:relative;flex:1 1 200px;min-width:0}
+input[type=search]{font:400 14px/1 var(--mono);background:var(--card);color:var(--fg);border:1px solid var(--border);border-radius:3px;padding:9px 10px;min-height:36px;width:100%}
+.suggest{position:absolute;left:0;right:0;top:100%;margin:2px 0 0;padding:0;list-style:none;background:var(--card);border:1px solid var(--border);z-index:1001;font:400 13px/1.3 var(--mono);display:none;max-height:300px;overflow:auto}
+.suggest li{padding:8px 10px;cursor:pointer;border-bottom:1px solid var(--rule)}
+.suggest li span{color:var(--muted)}
+.suggest li[aria-selected="true"],.suggest li:hover{background:var(--panel)}
+#lmap{height:640px;border:1px solid var(--border);background:var(--panel);border-radius:2px}
+@media (max-width:600px){#lmap{height:480px}}
+.leaflet-container{font:400 12px/1.4 var(--mono);background:var(--panel)}
+.leaflet-popup-content-wrapper,.leaflet-popup-tip{background:var(--card);color:var(--fg);border-radius:3px;box-shadow:0 2px 10px rgba(0,0,0,.25)}
+.leaflet-popup-content{margin:12px 14px;font:400 12.5px/1.45 var(--mono);min-width:220px}
+.leaflet-container a.leaflet-popup-close-button{color:var(--muted)}
+.leaflet-bar a,.leaflet-bar a:hover{background:var(--card);color:var(--fg);border-bottom-color:var(--border)}
+.leaflet-control-attribution{background:color-mix(in srgb,var(--card) 85%,transparent)!important;color:var(--muted)}
+.leaflet-control-attribution a{color:var(--fg)}
+.pop b.t{font:600 17px/1.2 var(--display);display:block;margin-bottom:2px}
+.pop .c{color:var(--muted);margin-bottom:6px}
+.pop dl{display:grid;grid-template-columns:auto 1fr;gap:1px 10px;margin:4px 0 6px}
+.pop dt{color:var(--muted)}.pop dd{margin:0}
+.pop .sec{font-weight:500;margin-top:8px;border-top:1px solid var(--rule);padding-top:6px}
+.pop .note{font-size:11.5px;color:var(--muted);margin:4px 0}
+.pop .gr{font-weight:500}
+.legend{display:flex;gap:6px 14px;flex-wrap:wrap;font:400 12px/1.3 var(--mono);color:var(--muted);margin-top:8px}
+.legend i{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:6px;vertical-align:-1px;border:1px solid var(--bg)}
+.pull{font:600 26px/1.25 var(--display);border-left:6px solid var(--hot);padding:4px 0 4px 18px;margin:30px 0}
+.note{background:var(--panel);border:1px solid var(--rule);padding:14px 16px;font-size:16px;margin:22px 0}
+.note h3{margin-top:0}
+table.t{width:100%;border-collapse:collapse;font:400 13px/1.35 var(--mono)}
+table.t th{text-align:left;font-weight:500;color:var(--muted);border-bottom:2px solid var(--fg);padding:6px 8px 6px 0}
+table.t td{border-bottom:1px solid var(--rule);padding:7px 8px 7px 0;vertical-align:top}
+table.t td.num,table.t th.num{text-align:right;white-space:nowrap}
+table.t td small{color:var(--muted);display:block}
+.tablewrap{overflow-x:auto}
+table.t .mob{display:none}
+@media (max-width:600px){table.t .wide,table.t .cty{display:none}table.t .mob{display:block}}
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:20px 0}
+@media (max-width:600px){.cards{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--border);border-left:4px solid var(--g0);padding:12px 14px;font:400 13px/1.5 var(--mono)}
+.card.up{border-left-color:var(--g5)}
+.card b{font:600 19px/1.2 var(--display);display:block;margin-bottom:2px}
+.card .big{font:900 30px/1.05 var(--display);margin:6px 0 2px}
+.card .big span{color:var(--muted);font:400 13px/1 var(--mono)}
+.cta{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}
+.cta a{font:500 13px/1 var(--mono);text-decoration:none;border:1px solid var(--fg);padding:11px 14px;border-radius:3px}
+.cta a.p{background:var(--hot);border-color:var(--hot);color:#fff}
+footer{border-top:6px double var(--fg);margin-top:56px;padding-top:16px;font:400 13px/1.55 var(--mono);color:var(--muted)}
+footer p{margin:0 0 10px}
+.theme{position:fixed;right:12px;bottom:12px;z-index:1002}
+@media print{.theme,.controls{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="kicker"><b>Data study</b><span>History × data</span><span>England, 1086 and 2021</span></div>
+<header class="hero">
+  <h1>Is <em>Domesday</em> destiny?</h1>
+  <svg class="mark" viewBox="-100 -100 200 200" aria-hidden="true"><g id="heroMark"></g></svg>
+  <p class="dek">In 1086 the Conqueror's commissioners counted England's households, village by village. I set every place they named against the 2021 census to see whether size then still predicts size now. Mostly, it does not.</p>
+</header>
+<div class="byline">Dr Tristan Hotham, Independent researcher · October 2026 · Data: Hull Domesday Project via realm-domesday, ONS Census 2021</div>
+
+<div class="stats">
+  <div><b>{{parish_main.n|int}}</b><span>parishes with households counted in 1086 and 2021</span></div>
+  <div><b class="h">{{parish_main.spearman|f2}}</b><span>rank correlation of size, 1086 to 2021 (1 = same order)</span></div>
+  <div><b class="h">{{top10_still_share|pct}}</b><span>of the biggest tenth in 1086 are still in the biggest tenth</span></div>
+  <div><b>{{parish_median_ratio|x1}}×</b><span>median growth in households since 1086</span></div>
+</div>
+
+<p class="lede">Domesday Book is the most famous count in English history. In 1086 the king's commissioners recorded, manor by manor, the villagers, smallholders and slaves who worked the land, the plough teams and mills, and what each estate was worth. It named {{places_total|int}} places. Most of them are still on the map.</p>
+<p>That makes it a rare natural experiment. If size in 1086 still shaped England today, the big villages of Domesday would be the big towns of now, and the small ones would still be small. I wanted to test that, place by place, across {{years|int}} years.</p>
+<p>The short answer is that Domesday is not destiny. The link between a parish's households in 1086 and in 2021 is positive, but weak. A few great places of 1086 now have only a handful of households, and some places Domesday barely noticed are now towns of tens of thousands of homes.</p>
+
+<h2><span class="n">01 · The map</span>Every Domesday place, then and now</h2>
+<p>Each dot below is a place named in Domesday Book, sized by the households recorded there in 1086. The colour shows how much its modern parish has grown since. Warm colours grew less than the typical parish, which has about {{parish_median_ratio|x0}} times as many households now as in 1086. The darkest red ones have fewer households now than then. Cool colours grew more.</p>
+<p>Switch to <em>Colour by 1086 size</em> to see the map of Domesday on its own. Search for a place, or tap any dot for its full record and a link to Open Domesday.</p>
+<div class="figure bleed">
+  <div class="controls">
+    <div class="seg" role="group" aria-label="Colour the dots by">
+      <button class="btn" data-mode="growth" aria-pressed="true">Colour by growth</button>
+      <button class="btn" data-mode="size" aria-pressed="false">Colour by 1086 size</button>
+    </div>
+    <div class="searchbox">
+      <input type="search" id="q" placeholder="Find a place, e.g. Waddingworth" aria-label="Find a Domesday place" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="sug">
+      <ul class="suggest" id="sug" role="listbox"></ul>
+    </div>
+  </div>
+  <div id="lmap" role="region" aria-label="Map of {{places_located|int}} Domesday places, sized by households in 1086 and coloured by growth to 2021"></div>
+  <div class="legend" id="legend"></div>
+  <div class="src">{{places_located|int}} located places. Growth = 2021 households in the modern parish divided by the 1086 households of all the Domesday places in that parish. Grey: no comparison possible (no 1086 household figure, or a town with no parish census figure in the source). Click the map to let the scroll wheel zoom it.</div>
+</div>
+
+<h2><span class="n">02 · The headline</span>A weak inheritance</h2>
+<p>Many modern parishes hold more than one Domesday place, so the fair test is at parish level: add up the households of every Domesday place inside a parish, and set that against the parish's households in the 2021 census. That gives {{parish_main.n|int}} parishes with a figure at both dates.</p>
+<p>The rank correlation between the two is {{parish_main.spearman|f2}}. On log scales, size in 1086 explains about {{parish_main.r2_log|pct}} of the variation in size today. The link is real and it points the right way: bigger then means bigger now, on average. But it is faint.</p>
+<div class="figure">
+  <div class="fig-h">Households in 1086 against households in 2021, by parish</div>
+  <div class="fig-sub">Each dot is a parish. Both axes on log scales. Orange line: best fit. Dotted line: the same number of households as in 1086.</div>
+  <div class="chart" id="scatter"></div>
+  <div class="src">N = {{parish_main.n|int}}. Pearson correlation of the logs {{parish_main.pearson_log|f2}}; Spearman {{parish_main.spearman|f2}}; fitted slope {{parish_main.slope|f2}}.</div>
+</div>
+<p>The slope of the fitted line is {{parish_main.slope|f2}}. In plain terms, a parish with ten times as many households as another in 1086 has, on average, only about {{parish_tenfold|f1}} times as many today. Of the {{top10_n|int}} parishes in the biggest tenth in 1086, {{top10_still_top10|int}} ({{top10_still_share|pct}}) are in the biggest tenth now. Chance alone would put about one in ten there. Meanwhile {{bottom10_now_top10|int}} of the {{bottom10_n|int}} smallest tenth have climbed into the top tenth.</p>
+<p>Almost everywhere grew. Only {{parish_fewer_now|int}} parishes ({{parish_fewer_now_share|pct1}}) have fewer households now than Domesday recorded. The middle half grew between {{parish_ratio_q25|x1}} and {{parish_ratio_q75|x0}} times. And the small grew fastest.</p>
+<div class="figure">
+  <div class="fig-h">Median growth in households, by size in 1086</div>
+  <div class="fig-sub">Parishes split into five equal groups by their 1086 households.</div>
+  <div class="chart" id="quint"></div>
+</div>
+<p>The smallest fifth of parishes grew by a median of {{quintiles.0.median_ratio|x0}} times; the biggest fifth by {{quintiles.4.median_ratio|x1}} times. Some of that is what noisy counts alone would produce: a place Domesday undercounted looks small in 1086 and then seems to grow fast. So I would not lean on the exact numbers. But the overall picture does not depend on them.</p>
+<p>I checked the result several ways, and it barely moves. Without Yorkshire, the Spearman correlation is {{parish_no_yorkshire.spearman|f2}}. Using only parishes where every Domesday place has a household figure, it is {{parish_complete.spearman|f2}}. Using only parishes with at least five households in 1086, {{parish_min5.spearman|f2}}. Against 2021 residents rather than households, {{parish_main_residents.spearman|f2}}. And for the {{place_alone.n|int}} Domesday places that sit alone in their modern parish, so no adding up is needed, it is {{place_alone.spearman|f2}}.</p>
+<p class="pull">Bigger then means bigger now, on average. But knowing a parish's size in 1086 tells you very little about its size today.</p>
+
+<h2><span class="n">03 · Fallen giants</span>Big in 1086, small now</h2>
+<p>Of the {{fallers_n_eligible|int}} parishes with at least {{thresholds.min_fall|int}} households in 1086, {{fallers_fewer_now|int}} have fewer households today. They cluster in the east: {{fallers_fewer_now_by_county.0.n|int}} are in Lincolnshire, {{fallers_fewer_now_by_county.1.n|int}} in Suffolk and {{fallers_fewer_now_by_county.2.n|int}} in Norfolk.</p>
+<div class="cards">
+  <div class="card"><b>Waddingworth, Lincolnshire</b><div class="big">{{example_waddingworth.households1086|int}} <span>households in 1086</span></div><div class="big">{{example_waddingworth.parishHouseholds2021|int}} <span>households in 2021 ({{example_waddingworth.parishResidents2021|int}} residents)</span></div></div>
+  <div class="card"><b>{{fallers.1.parish}}, {{fallers.1.county}}</b><div class="big">{{fallers.1.households1086|int}} <span>households in 1086</span></div><div class="big">{{fallers.1.households2021|int}} <span>households in 2021 ({{fallers.1.residents2021|int}} residents)</span></div></div>
+</div>
+<p>Waddingworth tops the list. A caution: its {{example_waddingworth.households1086|int}} households come from two entries ({{example_waddingworth.entries}}) that each describe a holding of six carucates there, one of them disputed between two lords. Some of the same people may be counted twice. Even halved, the fall is steep.</p>
+<div class="figure">
+  <div class="fig-h">The twenty biggest fallers</div>
+  <div class="fig-sub">Parishes with at least {{thresholds.min_fall|int}} households in 1086, ranked by 2021 households as a multiple of 1086 households.</div>
+  <div class="tablewrap"><table class="t" id="fallers"></table></div>
+  <div class="src">Parishes where more than half the 1086 households come from an entry with an "altogether" or "in total" clause are left out of this table and the next two, because such an entry can carry a total for a whole group of places ({{league_flag_excluded|int}} parishes left out).</div>
+</div>
+
+<h2><span class="n">04 · Domesday nobodies</span>Small in 1086, big now</h2>
+<p>At the other end are the places Domesday barely noticed. Here the modern parish carries a modern name, and the Domesday place inside it may be a hamlet now swallowed by a town. That is part of the story: much of today's population lives where Domesday recorded very few households.</p>
+<div class="cards">
+  <div class="card up"><b>{{risers.0.parish}}, {{risers.0.county}}</b><div class="big">{{risers.0.households1086|int}} <span>households in 1086 ({{risers.0.places}})</span></div><div class="big">{{risers.0.households2021|int}} <span>households in 2021</span></div></div>
+  <div class="card up"><b>{{nobodies.0.parish}}, {{nobodies.0.county}}</b><div class="big">{{nobodies.0.households1086|int}} <span>households in 1086</span></div><div class="big">{{nobodies.0.households2021|int}} <span>households in 2021</span></div></div>
+</div>
+<div class="figure">
+  <div class="controls"><div class="seg" role="group" aria-label="Which list"><button class="btn" data-l="risers" aria-pressed="true">Biggest risers</button><button class="btn" data-l="nobodies" aria-pressed="false">Biggest from almost nothing</button></div></div>
+  <div class="fig-sub" id="riseSub"></div>
+  <div class="tablewrap"><table class="t" id="risers"></table></div>
+</div>
+<p>Two gaps limit this list, and both hide some of the biggest risers. First, the census figures in the source exist only for civil parishes. Big towns and cities that are not civil parishes ({{unparished_examples.0.parishName|place}}, {{unparished_examples.1.parishName|place}}, {{unparished_examples.3.parishName|place}}, {{unparished_examples.7.parishName|place}} and others, {{parishes_unparished|int}} such areas in all) have no 2021 figure, so they drop out of every comparison here. They hold {{unparished_share_households1086|pct}} of the 1086 households. Second, {{nohh_parishes|int}} parishes contain Domesday places with no household figure at all. That is not the same as none. They include {{nohh_biggest.1.parish}}, {{nohh_biggest.2.parish}} and {{nohh_biggest.5.parish}}, where the entries do not give a count the data can sum.</p>
+
+<h2><span class="n">05 · The county picture</span>Where 1086 still shows</h2>
+<p>Persistence is not the same everywhere. Within {{county_spearman_max.county}}, the rank correlation between parish size in 1086 and 2021 is {{county_spearman_max.spearman|f2}}; within {{county_spearman_min.county}} it is {{county_spearman_min.spearman|f2}}, which is no link at all. Of the {{counties_n|int}} counties with at least 20 parishes, {{counties_spearman_over_04|int}} reach 0.4 or more and {{counties_spearman_under_02|int}} fall below 0.2.</p>
+<div class="figure">
+  <div class="controls"><div class="seg" role="group" aria-label="County measure">
+    <button class="btn" data-c="sp" aria-pressed="true">Persistence</button>
+    <button class="btn" data-c="gr" aria-pressed="false">Median growth</button>
+    <button class="btn" data-c="lost" aria-pressed="false">Possibly lost</button></div></div>
+  <div class="fig-h" id="ctyH"></div>
+  <div class="fig-sub" id="ctyS"></div>
+  <div class="chart" id="county"></div>
+</div>
+<p>Zoom out further and the pattern of 1086 is clearer. Add up each county's parishes and the correlation between county totals in 1086 and 2021 is {{county_aggregate.pearson_log|f2}} on log scales (Spearman {{county_aggregate.spearman|f2}}, {{county_aggregate.n|int}} counties). Which county a parish is in also matters about as much as its own size: in a simple model, county alone explains {{models.county_only.r2|pct1}} of the variation in parish households today, households in 1086 alone explain {{models.households.r2|pct1}}, and the two together {{models.households_county.r2|pct1}}.</p>
+
+<h2><span class="n">06 · Lost places</span>The villages that went</h2>
+<p>The data flags {{lost_n|int}} of the {{places_located|int}} located Domesday places ({{lost_share|pct}}) as possibly lost: no settlement in Wikidata and no modern place of the same name within 2 km. These are candidates, not findings. A grid error, a renamed place, a surviving farm or a quarter of a town can look lost.</p>
+<p>The possibly lost places were small. Their median was {{lost_hh_median|f1}} households in 1086, against {{notlost_hh_median|f1}} for the rest, and together they held {{lost_households_share|pct}} of all the households Domesday recorded. They are most common in {{lost_by_county.0.county}} ({{lost_by_county.0.share|pct}}) and {{lost_by_county.1.county}} ({{lost_by_county.1.share|pct}}), and rarest in {{lost_by_county.-1.county}} ({{lost_by_county.-1.share|pct1}}). A name that now survives only on a farm, or that has changed, is hard to match, so read the county pattern with care.</p>
+<div class="figure">
+  <div class="fig-h">The biggest possibly lost places</div>
+  <div class="fig-sub">By 1086 households, with the nearest modern place name.</div>
+  <div class="tablewrap"><table class="t" id="lost"></table></div>
+</div>
+
+<h2><span class="n">07 · Wealth, ploughs and mills</span>Does anything else in 1086 help?</h2>
+<p>Domesday recorded much more than people. Perhaps the richest places of 1086, or the ones with mills and plenty of plough teams, were the ones set up to grow. I tested that with a regression of 2021 households (log scale) on 1086 households, plus the value of the estate per household, plough teams per household, and whether a mill was recorded, across {{models.plus_wealth.n|int}} parishes with all of these figures.</p>
+<p>They add almost nothing. Households alone explain {{models.households.r2|pct1}} of the variation; adding wealth, ploughs and mills takes it to {{models.plus_wealth.r2|pct1}}. Each has a small positive coefficient. The 1086 value of a parish ranks with its 2021 size about as well as its households do (Spearman {{spearman_value1086|f2}}, against {{spearman_households_same_sample|f2}}). Parishes with a mill grew by a median of {{median_ratio_mill|x1}} times, those without by {{median_ratio_nomill|x1}}.</p>
+<p>One modern fact beats all of them: the area of today's parish. Adding it lifts the explained share to {{models.plus_area.r2|pct}}, and the coefficient on 1086 households falls from {{models.households.coef.lh86|f2}} to {{models.plus_area.coef.lh86|f2}}. One reading is that part of what looks like persistence is land: a large parish had room for many households then and has room for many now.</p>
+
+<h2><span class="n">08 · What Domesday counted</span>Households, not people</h2>
+<p>Domesday does not count people. It lists heads of households by status: villagers, smallholders, cottagers, slaves, freemen, burgesses and others. Their wives, children and dependants are not there. The "households" figure here is the sum of those heads, as the source data builds it. That is why I compare it with households in 2021, not with population. Turning Domesday's heads into a head count needs a multiplier, and historians disagree about the right one.</p>
+<p>The survey is also uneven. London and Winchester are not in it. The far north was largely not surveyed, and Yorkshire's record is thin: only {{yorkshire_with_households|int}} of its {{yorkshire_places|int}} places have a household figure. The figures for Essex, Norfolk and Suffolk come from Little Domesday, and here they are parsed from the translated text rather than from a coded database. An absent figure means the entry does not state it, which is not the same as zero.</p>
+
+<div class="note" id="method">
+  <h3>How I did this</h3>
+  <p><b>Data.</b> The realm-domesday repository joins the Hull Domesday Project's coded Domesday to the modern map: {{places_total|int}} places ({{places_located|int}} located) and their entries, each place linked to the 2021 civil parish containing the centre of its 1 km grid square. The repository reports that this parish agrees with Wikidata's {{repo_checks.parish_agrees_wikidata|pct}} of the time; a place near a boundary can land in its neighbour.</p>
+  <p><b>Counting households.</b> I sum the households of every entry that describes a place. When one entry describes several places, I share its households equally among them, as the repository's own then-and-now views do. {{places_shared_entry|int}} places take a share of a multi-place entry. Places an entry only names as dependencies get nothing from it.</p>
+  <p><b>Parishes.</b> For each modern parish I add up the households of its Domesday places and compare them with Census 2021 households (ONS). The main test uses the {{parish_main.n|int}} parishes with figures at both dates. Each parish is given the Domesday county of most of its places.</p>
+  <p><b>Statistics.</b> Pearson correlation and least-squares slope on log10 households, and Spearman rank correlation on the raw figures. The wealth model is ordinary least squares with robust standard errors. Growth ratios use at least {{thresholds.min_ratio|int}} households in 1086 for risers and {{thresholds.min_fall|int}} for fallers, to keep tiny numbers from dominating; the "from almost nothing" list takes parishes with {{thresholds.tiny|int}} households or fewer.</p>
+  <p><b>Known problems.</b> Big unparished towns and cities have no 2021 figure in the source and are left out. Some entries carry totals for a group of places while describing only one; {{total_clause_places|int}} places draw households from entries with an "altogether" or "in total" clause, and dropping the parishes involved leaves the correlation almost unchanged (Spearman {{parish_no_total_clause.spearman|f2}}). Domesday figures were parsed from Hull's coding and agree with Open Domesday's hand-coded figures for {{repo_checks.villagers_agreement|pct1}} of manors on villagers and {{repo_checks.smallholders_agreement|pct1}} on smallholders, in the repository's check of {{repo_checks.manors_checked|int}} manors. "Possibly lost" is a candidate list, never a finding.</p>
+</div>
+<div class="cta">
+  <a class="p" href="https://github.com/Tristan-Hotham/domesday-destiny">Data and code</a>
+  <a href="https://github.com/embabel-worlds/realm-domesday">realm-domesday</a>
+  <a href="https://opendomesday.org/">Open Domesday</a>
+</div>
+<footer>
+  <p>Dr Tristan Hotham, Independent researcher.</p>
+  <p>I wrote the text, with drafting and editing assistance from Claude (Anthropic), which also helped prepare the analysis code. I reviewed and checked all text and results.</p>
+  <p>Domesday data: Hull Domesday Project, Professor J.J.N. Palmer, George Slater and the University of Hull (CC BY-NC-SA). Joined data: the realm-domesday repository (embabel-worlds). Place links: Open Domesday by Anna Powell-Smith. Census 2021: Office for National Statistics, licensed under the Open Government Licence v3.0; contains OS data © Crown copyright and database right 2022. Base map © OpenStreetMap contributors © CARTO.</p>
+  <p>Because the Domesday figures are CC BY-NC-SA, the derived data and the text of this page are released under CC BY-NC-SA 4.0. The code is released under the MIT licence.</p>
+</footer>
+</div>
+<div class="tip" id="tip"></div>
+<button class="btn theme" id="theme" aria-label="Toggle dark mode">◐</button>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+const D = /*SITE*/;
+const R = /*RESULTS*/;
+const NS = "http://www.w3.org/2000/svg";
+const css = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const el = (t, a = {}, p) => { const e = document.createElementNS(NS, t); for (const k in a) e.setAttribute(k, a[k]); if (p) p.appendChild(e); return e; };
+const fmt = n => n == null ? "n/a" : Math.round(n).toLocaleString("en-GB");
+const fx = (x, d = 1) => x == null ? "n/a" : (x >= 100 ? fmt(x) : x.toFixed(x >= 10 ? 0 : d));
+const pc = (x, d = 0) => (x * 100).toFixed(d) + "%";
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const tip = document.getElementById("tip");
+function showTip(h, x, y) { tip.innerHTML = h; tip.style.display = "block"; const w = tip.offsetWidth; x = Math.max(w / 2 + 8, Math.min(innerWidth - w / 2 - 8, x)); tip.style.left = x + scrollX + "px"; tip.style.top = y + scrollY + "px"; }
+function hideTip() { tip.style.display = "none"; }
+function hover(node, h) { node.style.cursor = "pointer"; node.setAttribute("tabindex", "0"); const s = () => { const r = node.getBoundingClientRect(); showTip(h, r.left + r.width / 2, r.top); }; node.addEventListener("pointerenter", s); node.addEventListener("pointerleave", hideTip); node.addEventListener("focus", s); node.addEventListener("blur", hideTip); node.addEventListener("click", e => { s(); e.stopPropagation(); }); }
+document.addEventListener("click", hideTip);
+const redraws = [];
+function resp(box, render) { let last = 0; const go = (force) => { const w = Math.max(280, Math.round(box.clientWidth)); if (!force && Math.abs(w - last) < 4) return; last = w; box.innerHTML = ""; render(w, w < 560); }; new ResizeObserver(() => go()).observe(box); go(); redraws.push(() => go(true)); }
+const lbl = (svg, x, y, s, cls = "lab", anchor = "start") => { const t = el("text", { x, y, class: cls, "text-anchor": anchor }, svg); t.textContent = s; return t; };
+const isDark = () => { const r = document.documentElement; return r.dataset.theme ? r.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches; };
+const money = p => { if (p == null) return "n/a"; const d = Math.round(p), L = Math.floor(d / 240), s = Math.floor((d % 240) / 12), dd = d % 12; return [L ? "£" + L : "", s ? s + "s" : "", dd ? dd + "d" : ""].filter(Boolean).join(" ") || "0"; };
+
+/* theme toggle */
+document.getElementById("theme").onclick = () => { const r = document.documentElement; r.dataset.theme = isDark() ? "light" : "dark"; redraws.forEach(f => f()); };
+
+/* hero mark: Domesday dots on a shallow slope */
+(() => { const g = document.getElementById("heroMark");
+  el("line", { x1: -86, y1: 52, x2: 86, y2: -34, stroke: "var(--hot)", "stroke-width": 4, "stroke-linecap": "round" }, g);
+  el("line", { x1: -86, y1: 86, x2: 86, y2: -86, stroke: "var(--fg)", "stroke-width": 1.6, "stroke-dasharray": "3 6", opacity: .6 }, g);
+  [[-70, 40, 9, "--g1"], [-52, -40, 6, "--g4"], [-30, 60, 12, "--g0"], [-10, 2, 8, "--g2"], [12, -62, 10, "--g5"], [30, 30, 14, "--g1"], [50, -20, 7, "--g3"], [70, -70, 9, "--g4"], [76, 18, 16, "--g0"], [-80, -8, 5, "--g3"], [0, 44, 6, "--g2"], [40, -52, 5, "--g5"]]
+    .forEach(([x, y, r, c]) => el("circle", { cx: x, cy: y, r, fill: `var(${c})`, stroke: "var(--bg)", "stroke-width": 2 }, g));
+})();
+
+/* ===== map ===== */
+const PAR = D.parishes, CTY = D.counties;
+const PL = D.places.map((a, i) => ({ i, lat: a[0], lng: a[1], name: a[2], county: CTY[a[3]], hh: a[4], vil: a[5], sh: a[6], sl: a[7], pt: a[8], mills: a[9], val: a[10], par: a[11] >= 0 ? PAR[a[11]] : null, lost: a[12], path: a[13], k: a[14], tot: a[15] }));
+const GCL = [["--g0", "Fewer households now", r => r < 1], ["--g1", "1 to 3 times", r => r < 3], ["--g2", "3 to 10 times", r => r < 10], ["--g3", "10 to 30 times", r => r < 30], ["--g4", "30 to 100 times", r => r < 100], ["--g5", "Over 100 times", r => true]];
+const SCL = [["--s1", "Up to 10 households", h => h <= 10], ["--s2", "11 to 25", h => h <= 25], ["--s3", "26 to 50", h => h <= 50], ["--s4", "51 to 100", h => h <= 100], ["--s5", "Over 100", h => true]];
+function gclass(p) { const r = p.par && p.par[5]; if (r == null) return -1; return GCL.findIndex(c => c[2](r)); }
+function sclass(p) { if (!(p.hh > 0)) return -1; return SCL.findIndex(c => c[2](p.hh)); }
+PL.forEach(p => { p.gc = gclass(p); p.sc = sclass(p); });
+let mode = "growth", lmap, markers = [], tiles;
+function rad(p, z) { const f = Math.pow(1.45, Math.min(z, 10) - 7); const base = p.hh > 0 ? 0.9 + Math.sqrt(p.hh) * 0.42 : 0.9; return Math.max(1.4, Math.min(26, base * f)); }
+function colOf(p, pal) { const c = mode === "growth" ? p.gc : p.sc; return c < 0 ? pal.gn : (mode === "growth" ? pal.g[c] : pal.s[c]); }
+function palette() { return { g: GCL.map(c => css(c[0])), s: SCL.map(c => css(c[0])), gn: css("--gn"), bg: css("--bg") }; }
+function popup(p) {
+  const row = (k, v) => v == null ? "" : `<dt>${k}</dt><dd>${v}</dd>`;
+  const pr = p.par;
+  let h = `<div class="pop"><b class="t">${esc(p.name)}</b><div class="c">${esc(p.county)} (Domesday county)</div>`;
+  h += `<div class="sec">1086</div><dl>${row("Households", p.hh != null ? fx(p.hh) : "no figure")}${row("Villagers", p.vil != null ? fx(p.vil) : null)}${row("Smallholders", p.sh != null ? fx(p.sh) : null)}${row("Slaves", p.sl != null ? fx(p.sl) : null)}${row("Plough teams", p.pt != null ? fx(p.pt) : null)}${row("Mills", p.mills != null ? fx(p.mills) : null)}${row("Value", p.val != null ? money(p.val) : null)}</dl>`;
+  if (p.k > 1) h += `<div class="note">Includes an equal share of an entry that describes ${p.k} places.</div>`;
+  if (p.tot) h += `<div class="note">Includes an entry with an "altogether" or "in total" clause, which may cover other places.</div>`;
+  if (pr) { h += `<div class="sec">Today: ${esc(pr[0])}</div><dl>${row("District", esc(pr[1]))}${row("Residents 2021", pr[2] != null ? fmt(pr[2]) : "no figure")}${row("Households 2021", pr[3] != null ? fmt(pr[3]) : "no figure")}${row("Domesday places in parish", pr[6])}${row("Their households 1086", pr[4] != null ? fx(pr[4]) : null)}</dl>`;
+    h += pr[5] != null ? `<div class="gr">${pr[5] < 1 ? "Fewer households now: " + pr[5].toFixed(2) + " times" : fx(pr[5]) + " times as many households as in 1086"}</div>` : `<div class="note">No growth figure for this parish.</div>`; }
+  else h += `<div class="note">Not matched to an English civil parish.</div>`;
+  if (p.lost) h += `<div class="note">Flagged as possibly lost (a candidate, not a finding).</div>`;
+  if (p.path) h += `<div style="margin-top:8px"><a href="https://opendomesday.org/place/${encodeURI(p.path)}/" target="_blank" rel="noopener">Open Domesday entry</a></div>`;
+  return h + "</div>";
+}
+function legend() {
+  const box = document.getElementById("legend"); const cl = mode === "growth" ? GCL : SCL; const key = mode === "growth" ? "gc" : "sc";
+  const n = cl.map((_, i) => PL.filter(p => p[key] === i).length), none = PL.filter(p => p[key] < 0).length;
+  box.innerHTML = (mode === "growth" ? "<span>Households 2021 ÷ 1086:</span>" : "<span>Households 1086:</span>") + cl.map((c, i) => `<span><i style="background:var(${c[0]})"></i>${c[1]} (${fmt(n[i])})</span>`).join("") + `<span><i style="background:var(--gn)"></i>${mode === "growth" ? "No comparison" : "No figure"} (${fmt(none)})</span><span>Dot size = households in 1086</span>`;
+}
+function restyle() { const pal = palette(), z = lmap.getZoom(); markers.forEach(m => { const p = m.p; m.setStyle({ fillColor: colOf(p, pal), color: pal.bg, radius: rad(p, z) }); }); legend(); }
+function tileUrl() { return `https://{s}.basemaps.cartocdn.com/${isDark() ? "dark_all" : "light_all"}/{z}/{x}/{y}{r}.png`; }
+(() => {
+  if (!window.L) { document.getElementById("lmap").innerHTML = '<p style="padding:16px">The map library did not load.</p>'; return; }
+  lmap = L.map("lmap", { preferCanvas: true, zoomSnap: 0.5, minZoom: 5, maxZoom: 15, scrollWheelZoom: false, worldCopyJump: false });
+  const narrow = innerWidth < 600;
+  lmap.fitBounds([[50.0, -5.6], [54.6, 1.8]], { padding: narrow ? [0, 0] : [10, 10] });
+  tiles = L.tileLayer(tileUrl(), { attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>', subdomains: "abcd", maxZoom: 19 }).addTo(lmap);
+  const rend = L.canvas({ padding: 0.5, tolerance: 3 });
+  const pal = palette(), z = lmap.getZoom();
+  [...PL].sort((a, b) => (b.hh || 0) - (a.hh || 0)).forEach(p => {
+    const m = L.circleMarker([p.lat, p.lng], { renderer: rend, radius: rad(p, z), weight: 0.6, color: pal.bg, opacity: 0.9, fillColor: colOf(p, pal), fillOpacity: 0.86 });
+    m.p = p; m.bindPopup(() => popup(p), { maxWidth: 300, autoPanPadding: [20, 20] }); m.addTo(lmap); markers.push(m); p.m = m; });
+  lmap.on("zoomend", restyle);
+  lmap.on("click focus", () => lmap.scrollWheelZoom.enable());
+  lmap.getContainer().addEventListener("mouseleave", () => lmap.scrollWheelZoom.disable());
+  legend();
+  document.querySelectorAll("[data-mode]").forEach(b => b.onclick = () => { mode = b.dataset.mode; document.querySelectorAll("[data-mode]").forEach(x => x.setAttribute("aria-pressed", x === b)); restyle(); });
+  redraws.push(() => { tiles.setUrl(tileUrl()); restyle(); });
+  matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => redraws.forEach(f => f()));
+})();
+
+/* search */
+(() => {
+  const q = document.getElementById("q"), sug = document.getElementById("sug");
+  const norm = s => s.toLowerCase().replace(/[\[\]{}`'.]/g, "").replace(/\s+/g, " ").trim();
+  PL.forEach(p => p.key = norm(p.name));
+  let list = [], sel = -1;
+  function go(p) { sug.style.display = "none"; q.setAttribute("aria-expanded", "false"); q.value = p.name.replace(/[\[\]{}`']/g, ""); if (!lmap) return; lmap.setView([p.lat, p.lng], 12); setTimeout(() => p.m.openPopup(), 300); }
+  function render() { sug.innerHTML = list.map((p, i) => `<li role="option" aria-selected="${i === sel}" data-i="${i}">${esc(p.name)} <span>${esc(p.county)}${p.hh ? ", " + fx(p.hh) + " households" : ""}</span></li>`).join(""); sug.style.display = list.length ? "block" : "none"; q.setAttribute("aria-expanded", list.length > 0); }
+  q.addEventListener("input", () => { const t = norm(q.value); sel = -1; if (t.length < 2) { list = []; render(); return; }
+    const a = PL.filter(p => p.key.startsWith(t)), b = PL.filter(p => !p.key.startsWith(t) && p.key.includes(t));
+    list = [...a.sort((x, y) => (y.hh || 0) - (x.hh || 0)), ...b].slice(0, 10); render(); });
+  q.addEventListener("keydown", e => { if (!list.length) return; if (e.key === "ArrowDown") { sel = Math.min(list.length - 1, sel + 1); render(); e.preventDefault(); } else if (e.key === "ArrowUp") { sel = Math.max(0, sel - 1); render(); e.preventDefault(); } else if (e.key === "Enter") { go(list[Math.max(0, sel)]); e.preventDefault(); } else if (e.key === "Escape") { list = []; render(); } });
+  sug.addEventListener("click", e => { const li = e.target.closest("li"); if (li) go(list[+li.dataset.i]); e.stopPropagation(); });
+  document.addEventListener("click", e => { if (e.target !== q) { sug.style.display = "none"; q.setAttribute("aria-expanded", "false"); } });
+})();
+
+/* ===== scatter ===== */
+resp(document.getElementById("scatter"), (W, nar) => {
+  const H = nar ? 380 : 470, m = { l: 52, r: 12, t: 12, b: 40 };
+  const svg = el("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": "Scatter of parish households in 1086 against 2021, log scales" }, document.getElementById("scatter"));
+  const x0 = -0.5, x1 = 3.5, y0 = 0, y1 = 5;
+  const X = v => m.l + (Math.log10(v) - x0) / (x1 - x0) * (W - m.l - m.r), Y = v => H - m.b - (Math.log10(v) - y0) / (y1 - y0) * (H - m.t - m.b);
+  [1, 10, 100, 1000].forEach(t => { el("line", { x1: X(t), x2: X(t), y1: m.t, y2: H - m.b, stroke: "var(--rule)" }, svg); lbl(svg, X(t), H - m.b + 16, fmt(t), "lab m s", "middle"); });
+  [1, 10, 100, 1000, 10000, 100000].forEach(t => { el("line", { x1: m.l, x2: W - m.r, y1: Y(t), y2: Y(t), stroke: "var(--rule)" }, svg); lbl(svg, m.l - 6, Y(t) + 4, t >= 1000 ? fmt(t / 1000) + "k" : t, "lab m s", "end"); });
+  lbl(svg, (m.l + W - m.r) / 2, H - 4, "Households in 1086 (Domesday places in the parish)", "lab m s", "middle");
+  const yl = lbl(svg, 0, 0, "Households in 2021", "lab m s", "middle"); yl.setAttribute("transform", `translate(12 ${(m.t + H - m.b) / 2}) rotate(-90)`);
+  const g = el("g", {}, svg); const pts = [];
+  D.scatter.forEach(s => { const cx = X(Math.max(s[0], 0.32)), cy = Y(s[1]); pts.push([cx, cy, s]); el("circle", { cx: cx.toFixed(1), cy: cy.toFixed(1), r: nar ? 1.6 : 2, fill: "var(--blue)", "fill-opacity": .32 }, g); });
+  el("line", { x1: X(1), y1: Y(1), x2: X(3000), y2: Y(3000), stroke: "var(--fg)", "stroke-width": 1.4, "stroke-dasharray": "2 4", opacity: .7 }, svg);
+  const f = R.parish_main, fy = v => Math.pow(10, f.intercept + f.slope * Math.log10(v));
+  el("line", { x1: X(0.5), y1: Y(fy(0.5)), x2: X(2000), y2: Y(fy(2000)), stroke: "var(--hot)", "stroke-width": 2.5 }, svg);
+  lbl(svg, X(2000) - 4, Y(fy(2000)) - 8, "best fit", "lab s b", "end");
+  lbl(svg, X(2) + 8, Y(2) + 4, "no change", "lab m s", "start");
+  const call = { Waddingworth: "start", Bracknell: "start", Thetford: "end", Northampton: "end", Macclesfield: "end" };
+  Object.keys(call).forEach(nm => { if (nar && nm === "Macclesfield") return; const c = pts.filter(p => p[2][2] === nm).sort((a, b) => b[2][0] - a[2][0])[0]; if (!c) return;
+    el("circle", { cx: c[0], cy: c[1], r: 4.5, fill: "none", stroke: "var(--fg)", "stroke-width": 1.5 }, svg); const right = call[nm] === "start"; lbl(svg, c[0] + (right ? 8 : -8), c[1] + 4, nm, "lab s b", call[nm]); });
+  const hl = el("circle", { r: 5, fill: "none", stroke: "var(--hot)", "stroke-width": 2, visibility: "hidden" }, svg);
+  const ov = el("rect", { x: m.l, y: m.t, width: W - m.l - m.r, height: H - m.t - m.b, fill: "transparent" }, svg);
+  ov.addEventListener("pointermove", e => { const r = svg.getBoundingClientRect(), k = W / r.width, mx = (e.clientX - r.left) * k, my = (e.clientY - r.top) * k; let best = null, bd = 144; for (const p of pts) { const d = (p[0] - mx) ** 2 + (p[1] - my) ** 2; if (d < bd) { bd = d; best = p; } }
+    if (!best) { hl.setAttribute("visibility", "hidden"); hideTip(); return; } hl.setAttribute("cx", best[0]); hl.setAttribute("cy", best[1]); hl.setAttribute("visibility", "visible"); const s = best[2];
+    showTip(`<b>${esc(s[2])}</b>, ${esc(s[3])}<br>1086: ${fx(s[0])} households<br>2021: ${fmt(s[1])} households<br>${s[1] / s[0] < 1 ? "Fewer now" : fx(s[1] / s[0]) + " times as many"}`, r.left + best[0] / k, r.top + best[1] / k); });
+  ov.addEventListener("pointerleave", () => { hl.setAttribute("visibility", "hidden"); hideTip(); });
+});
+
+/* ===== quintiles ===== */
+resp(document.getElementById("quint"), (W, nar) => {
+  const rows = R.quintiles, rowH = 44, m = { l: nar ? 0 : 190, r: 50, t: 4, b: 24 }, H = rows.length * rowH + m.t + m.b;
+  const svg = el("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": "Median growth by 1086 size group" }, document.getElementById("quint"));
+  const max = Math.max(...rows.map(r => r.median_ratio)), X = v => m.l + v / max * (W - m.l - m.r);
+  const names = ["Smallest fifth", "Second fifth", "Middle fifth", "Fourth fifth", "Biggest fifth"];
+  rows.forEach((r, i) => { const y = m.t + i * rowH + (nar ? 18 : 10); const t = `${names[i]} (${fx(r.lo)} to ${fmt(r.hi)})`;
+    lbl(svg, nar ? 0 : m.l - 10, nar ? y - 5 : y + 13, t, "lab", nar ? "start" : "end");
+    const b = el("rect", { x: m.l, y, width: Math.max(2, X(r.median_ratio) - m.l), height: 18, rx: 2, fill: i < 2 ? "var(--g4)" : "var(--g3)" }, svg);
+    hover(b, `<b>${names[i]}</b><br>${fmt(r.n)} parishes with ${fx(r.lo)} to ${fmt(r.hi)} households in 1086<br>Median 1086: ${fx(r.median1086)}; median 2021: ${fmt(r.median2021)}<br>Median growth: ${fx(r.median_ratio)} times`);
+    lbl(svg, X(r.median_ratio) + 6, y + 13, fx(r.median_ratio) + "×", "lab b"); });
+  lbl(svg, m.l, H - 6, "Median ratio of 2021 to 1086 households", "lab m s");
+});
+
+/* ===== tables ===== */
+const tRow = (r, i) => `<tr><td class="num">${i + 1}</td><td>${esc(r.parish)}<small>${esc(r.district)}</small><small class="mob">${esc(r.county)} in 1086</small></td><td class="cty">${esc(r.county)}</td><td class="wide">${esc(r.places)}</td><td class="num">${fx(r.households1086)}</td><td class="num">${fmt(r.households2021)}</td><td class="num">${r.ratio < 1 ? r.ratio.toFixed(2) : fx(r.ratio)}×</td></tr>`;
+const tHead = `<thead><tr><th class="num">#</th><th>Parish today</th><th class="cty">County 1086</th><th class="wide">Domesday places</th><th class="num">1086</th><th class="num">2021</th><th class="num">Ratio</th></tr></thead>`;
+document.getElementById("fallers").innerHTML = tHead + "<tbody>" + R.fallers.map(tRow).join("") + "</tbody>";
+(() => { const t = document.getElementById("risers"), sub = document.getElementById("riseSub");
+  const show = k => { t.innerHTML = tHead + "<tbody>" + R[k].map(tRow).join("") + "</tbody>"; sub.textContent = k === "risers" ? `The biggest ratios of 2021 to 1086 households, among parishes with at least ${R.thresholds.min_ratio} households in 1086.` : `The biggest parishes today among those whose Domesday places had ${R.thresholds.tiny} households or fewer in 1086.`; };
+  document.querySelectorAll("[data-l]").forEach(b => b.onclick = () => { document.querySelectorAll("[data-l]").forEach(x => x.setAttribute("aria-pressed", x === b)); show(b.dataset.l); });
+  show("risers"); })();
+document.getElementById("lost").innerHTML = `<thead><tr><th>Place</th><th>County</th><th class="num">1086</th><th>Nearest modern place</th></tr></thead><tbody>` + R.lost_biggest.map(r => `<tr><td><a href="https://opendomesday.org/place/${encodeURI(r.path)}/" target="_blank" rel="noopener">${esc(r.name)}</a>${r.totalClause ? " *" : ""}</td><td>${esc(r.county)}</td><td class="num">${fx(r.households1086)}</td><td>${esc(r.nearest)} <small>${r.km} km; parish: ${esc(r.parish)}</small></td></tr>`).join("") + "</tbody>";
+if (R.lost_biggest.some(r => r.totalClause)) document.getElementById("lost").insertAdjacentHTML("afterend", `<div class="src">* Includes an entry with an "altogether" or "in total" clause, which may cover other places.</div>`);
+
+/* ===== county chart ===== */
+(() => { let cm = "sp"; const box = document.getElementById("county"), H3 = document.getElementById("ctyH"), S = document.getElementById("ctyS");
+  const lostMap = Object.fromEntries(R.lost_by_county.map(r => [r.county, r]));
+  function rows() { if (cm === "lost") return R.lost_by_county.map(r => ({ c: r.county, v: r.share, n: r.n, t: `${fmt(r.lost)} of ${fmt(r.n)} located places possibly lost` }));
+    const k = cm === "sp" ? "spearman" : "median_ratio"; return [...R.by_county].sort((a, b) => b[k] - a[k]).map(r => ({ c: r.county, v: r[k], n: r.n, t: `${fmt(r.n)} parishes. Spearman ${r.spearman.toFixed(2)}; median growth ${fx(r.median_ratio)} times; ${pc(r.fewer_now_share, 1)} have fewer households now` })); }
+  function draw() { box.innerHTML = "";
+    H3.textContent = cm === "sp" ? "How well 1086 size predicts 2021 size, within each county" : cm === "gr" ? "Median growth in parish households, 1086 to 2021" : "Share of located Domesday places flagged as possibly lost";
+    S.textContent = cm === "sp" ? "Spearman rank correlation across the county's parishes. Counties with at least 20 parishes." : cm === "gr" ? "Median of 2021 households ÷ 1086 households across the county's parishes." : "Candidates only: no Wikidata settlement and no same-named modern place within 2 km.";
+    const W = Math.max(280, box.clientWidth), nar = W < 560, rs = rows(), rowH = 21, m = { l: nar ? 118 : 150, r: 46, t: 4, b: 22 }, H = rs.length * rowH + m.t + m.b;
+    const svg = el("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": H3.textContent }, box);
+    const max = Math.max(...rs.map(r => r.v)), X = v => m.l + Math.max(0, v) / max * (W - m.l - m.r);
+    const col = cm === "sp" ? "var(--gold)" : cm === "gr" ? "var(--g4)" : "var(--g0)";
+    rs.forEach((r, i) => { const y = m.t + i * rowH; lbl(svg, m.l - 8, y + 14, r.c, nar ? "lab s" : "lab", "end");
+      const b = el("rect", { x: m.l, y: y + 3, width: Math.max(1.5, X(r.v) - m.l), height: rowH - 6, rx: 2, fill: col }, svg); hover(b, `<b>${esc(r.c)}</b><br>${r.t}`);
+      lbl(svg, X(r.v) + 5, y + 14, cm === "sp" ? r.v.toFixed(2) : cm === "gr" ? fx(r.v) + "×" : pc(r.v), "lab s"); });
+  }
+  document.querySelectorAll("[data-c]").forEach(b => b.onclick = () => { cm = b.dataset.c; document.querySelectorAll("[data-c]").forEach(x => x.setAttribute("aria-pressed", x === b)); draw(); });
+  new ResizeObserver(draw).observe(box); draw(); redraws.push(draw);
+})();
+</script>
+</body>
+</html>
