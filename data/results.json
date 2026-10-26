@@ -1,0 +1,1948 @@
+{
+ "places_total": 14334,
+ "places_located": 13068,
+ "places_with_households": 10869,
+ "households_1086_total": 273961.0,
+ "entries_note": "figures from entries that DESCRIBE a place, shared equally when an entry describes several",
+ "places_shared_entry": 2522,
+ "parishes_total": 7641,
+ "parishes_unparished": 185,
+ "unparished_households1086": 24007.0,
+ "unparished_share_households1086": 0.094,
+ "unparished_examples": [
+  {
+   "parishName": "Norwich, unparished area",
+   "households1086": 1963.0
+  },
+  {
+   "parishName": "Canterbury, unparished area",
+   "households1086": 1144.0
+  },
+  {
+   "parishName": "Brighton and Hove, unparished area",
+   "households1086": 569.0
+  },
+  {
+   "parishName": "Derby, unparished area",
+   "households1086": 565.0
+  },
+  {
+   "parishName": "Somerset West and Taunton, unparished area",
+   "households1086": 459.0
+  },
+  {
+   "parishName": "Thurrock, unparished area",
+   "households1086": 431.0
+  },
+  {
+   "parishName": "Swale, unparished area",
+   "households1086": 393.0
+  },
+  {
+   "parishName": "Nottingham, unparished area",
+   "households1086": 383.0
+  }
+ ],
+ "years": 935,
+ "yorkshire_places": 2148,
+ "yorkshire_with_households": 648,
+ "repo_checks": {
+  "source": "realm-domesday README.md",
+  "parish_agrees_wikidata": 0.9,
+  "manors_checked": 450,
+  "villagers_agreement": 0.987,
+  "smallholders_agreement": 0.989
+ },
+ "places_no_parish": 1266,
+ "lost_n": 2581,
+ "lost_share": 0.198,
+ "lost_with_households": 1744,
+ "lost_households1086": 21127.0,
+ "lost_households_share": 0.083,
+ "lost_hh_median": 7.8,
+ "notlost_hh_median": 19.0,
+ "lost_by_county": [
+  {
+   "county": "Cornwall",
+   "n": 316,
+   "lost": 163,
+   "share": 0.516
+  },
+  {
+   "county": "Devon",
+   "n": 901,
+   "lost": 343,
+   "share": 0.381
+  },
+  {
+   "county": "Sussex",
+   "n": 319,
+   "lost": 103,
+   "share": 0.323
+  },
+  {
+   "county": "Kent",
+   "n": 346,
+   "lost": 92,
+   "share": 0.266
+  },
+  {
+   "county": "Hertfordshire",
+   "n": 161,
+   "lost": 42,
+   "share": 0.261
+  },
+  {
+   "county": "Essex",
+   "n": 397,
+   "lost": 95,
+   "share": 0.239
+  },
+  {
+   "county": "Worcestershire",
+   "n": 252,
+   "lost": 60,
+   "share": 0.238
+  },
+  {
+   "county": "Herefordshire",
+   "n": 299,
+   "lost": 70,
+   "share": 0.234
+  },
+  {
+   "county": "Hampshire",
+   "n": 425,
+   "lost": 99,
+   "share": 0.233
+  },
+  {
+   "county": "Somerset",
+   "n": 575,
+   "lost": 121,
+   "share": 0.21
+  },
+  {
+   "county": "Cheshire",
+   "n": 394,
+   "lost": 82,
+   "share": 0.208
+  },
+  {
+   "county": "Yorkshire",
+   "n": 2028,
+   "lost": 419,
+   "share": 0.207
+  },
+  {
+   "county": "Dorset",
+   "n": 327,
+   "lost": 65,
+   "share": 0.199
+  },
+  {
+   "county": "Gloucestershire",
+   "n": 472,
+   "lost": 92,
+   "share": 0.195
+  },
+  {
+   "county": "Rutland",
+   "n": 38,
+   "lost": 7,
+   "share": 0.184
+  },
+  {
+   "county": "Surrey",
+   "n": 142,
+   "lost": 26,
+   "share": 0.183
+  },
+  {
+   "county": "Suffolk",
+   "n": 548,
+   "lost": 99,
+   "share": 0.181
+  },
+  {
+   "county": "Shropshire",
+   "n": 428,
+   "lost": 77,
+   "share": 0.18
+  },
+  {
+   "county": "Derbyshire",
+   "n": 322,
+   "lost": 52,
+   "share": 0.161
+  },
+  {
+   "county": "Middlesex",
+   "n": 59,
+   "lost": 9,
+   "share": 0.153
+  },
+  {
+   "county": "Wiltshire",
+   "n": 313,
+   "lost": 46,
+   "share": 0.147
+  },
+  {
+   "county": "Berkshire",
+   "n": 211,
+   "lost": 31,
+   "share": 0.147
+  },
+  {
+   "county": "Warwickshire",
+   "n": 280,
+   "lost": 38,
+   "share": 0.136
+  },
+  {
+   "county": "Staffordshire",
+   "n": 325,
+   "lost": 44,
+   "share": 0.135
+  },
+  {
+   "county": "Oxfordshire",
+   "n": 257,
+   "lost": 31,
+   "share": 0.121
+  },
+  {
+   "county": "Lincolnshire",
+   "n": 778,
+   "lost": 90,
+   "share": 0.116
+  },
+  {
+   "county": "Norfolk",
+   "n": 677,
+   "lost": 77,
+   "share": 0.114
+  },
+  {
+   "county": "Bedfordshire",
+   "n": 147,
+   "lost": 14,
+   "share": 0.095
+  },
+  {
+   "county": "Nottinghamshire",
+   "n": 291,
+   "lost": 26,
+   "share": 0.089
+  },
+  {
+   "county": "Buckinghamshire",
+   "n": 211,
+   "lost": 17,
+   "share": 0.081
+  },
+  {
+   "county": "Northamptonshire",
+   "n": 317,
+   "lost": 21,
+   "share": 0.066
+  },
+  {
+   "county": "Cambridgeshire",
+   "n": 140,
+   "lost": 9,
+   "share": 0.064
+  },
+  {
+   "county": "Leicestershire",
+   "n": 286,
+   "lost": 18,
+   "share": 0.063
+  },
+  {
+   "county": "Huntingdonshire",
+   "n": 86,
+   "lost": 3,
+   "share": 0.035
+  }
+ ],
+ "lost_biggest": [
+  {
+   "name": "Langport",
+   "county": "Kent",
+   "households1086": 161.0,
+   "nearest": "St Martin's",
+   "km": 0.6,
+   "parish": "Canterbury, unparished area",
+   "path": "TR1557/langport",
+   "totalClause": false
+  },
+  {
+   "name": "Islington",
+   "county": "Norfolk",
+   "households1086": 146.5,
+   "nearest": "Eau Brink",
+   "km": 1.19,
+   "parish": "Tilney St. Lawrence",
+   "path": "TF5716/islington",
+   "totalClause": false
+  },
+  {
+   "name": "Westgate",
+   "county": "Kent",
+   "households1086": 140.0,
+   "nearest": "Dane John",
+   "km": 0.32,
+   "parish": "Canterbury, unparished area",
+   "path": "TR1457/westgate",
+   "totalClause": true
+  },
+  {
+   "name": "Desning",
+   "county": "Suffolk",
+   "households1086": 139.0,
+   "nearest": "Gazeley",
+   "km": 1.41,
+   "parish": "Gazeley",
+   "path": "TL7363/desning",
+   "totalClause": false
+  },
+  {
+   "name": "Thorney",
+   "county": "Suffolk",
+   "households1086": 136.0,
+   "nearest": "Stowmarket",
+   "km": 0.42,
+   "parish": "Stowmarket",
+   "path": "TM0558/thorney",
+   "totalClause": false
+  },
+  {
+   "name": "Northgate",
+   "county": "Kent",
+   "households1086": 133.0,
+   "nearest": "Canterbury",
+   "km": 0.72,
+   "parish": "Canterbury, unparished area",
+   "path": "TR1558/northgate",
+   "totalClause": true
+  },
+  {
+   "name": "Waltham [Holy Cross]",
+   "county": "Essex",
+   "households1086": 126.0,
+   "nearest": "Town Mead",
+   "km": 0.75,
+   "parish": "Waltham Abbey",
+   "path": "TL3800/waltham-holy-cross",
+   "totalClause": false
+  },
+  {
+   "name": "Coten",
+   "county": "Warwickshire",
+   "households1086": 120.0,
+   "nearest": "Packmores",
+   "km": 0.43,
+   "parish": "Warwick",
+   "path": "SP2865/coten",
+   "totalClause": false
+  },
+  {
+   "name": "The Naze",
+   "county": "Essex",
+   "households1086": 119.0,
+   "nearest": "Kirby le Soken",
+   "km": 1.8,
+   "parish": "Thorpe-le-Soken",
+   "path": "TM2323/the-naze",
+   "totalClause": false
+  },
+  {
+   "name": "Southmere",
+   "county": "Norfolk",
+   "households1086": 113.0,
+   "nearest": "Summerfield",
+   "km": 1.07,
+   "parish": "Docking",
+   "path": "TF7537/southmere",
+   "totalClause": false
+  },
+  {
+   "name": "Hudeston",
+   "county": "Norfolk",
+   "households1086": 113.0,
+   "nearest": "Bunwell",
+   "km": 0.42,
+   "parish": "Carleton Rode",
+   "path": "TM1193/hudeston",
+   "totalClause": false
+  },
+  {
+   "name": "Barton",
+   "county": "Berkshire",
+   "households1086": 102.5,
+   "nearest": "Abbey Gardens",
+   "km": 0.56,
+   "parish": "Abingdon on Thames",
+   "path": "SU5097/barton",
+   "totalClause": false
+  }
+ ],
+ "total_clause_households1086": 13557.0,
+ "total_clause_places": 289,
+ "parish_main": {
+  "n": 6376,
+  "pearson_log": 0.201,
+  "r2_log": 0.041,
+  "spearman": 0.223,
+  "slope": 0.309,
+  "intercept": 2.033
+ },
+ "parish_main_residents": {
+  "n": 6376,
+  "pearson_log": 0.198,
+  "r2_log": 0.039,
+  "spearman": 0.219,
+  "slope": 0.303,
+  "intercept": 2.413
+ },
+ "parish_complete": {
+  "n": 5585,
+  "pearson_log": 0.203,
+  "r2_log": 0.041,
+  "spearman": 0.23,
+  "slope": 0.318,
+  "intercept": 1.999
+ },
+ "parish_no_yorkshire": {
+  "n": 5921,
+  "pearson_log": 0.195,
+  "r2_log": 0.038,
+  "spearman": 0.222,
+  "slope": 0.308,
+  "intercept": 2.027
+ },
+ "parish_no_total_clause": {
+  "n": 6152,
+  "pearson_log": 0.195,
+  "r2_log": 0.038,
+  "spearman": 0.219,
+  "slope": 0.299,
+  "intercept": 2.045
+ },
+ "parish_min5": {
+  "n": 5989,
+  "pearson_log": 0.232,
+  "r2_log": 0.054,
+  "spearman": 0.234,
+  "slope": 0.43,
+  "intercept": 1.844
+ },
+ "parish_tenfold": 2.04,
+ "parish_median_ratio": 9.5,
+ "parish_ratio_q25": 3.86,
+ "parish_ratio_q75": 32.66,
+ "parish_fewer_now": 214,
+ "parish_fewer_now_share": 0.034,
+ "parish_households1086_median": 27.0,
+ "parish_households2021_median": 247.0,
+ "parish_main_households1086_sum": 231956.0,
+ "top10_n": 647,
+ "top10_still_top10": 139,
+ "top10_still_share": 0.215,
+ "bottom10_n": 743,
+ "bottom10_now_top10": 60,
+ "bottom10_now_top10_share": 0.081,
+ "quintiles": [
+  {
+   "q": 1,
+   "n": 1276,
+   "lo": 0.5,
+   "hi": 11.0,
+   "median1086": 7.0,
+   "median2021": 192.0,
+   "median_ratio": 35.92
+  },
+  {
+   "q": 2,
+   "n": 1275,
+   "lo": 11.0,
+   "hi": 21.0,
+   "median1086": 16.0,
+   "median2021": 171.0,
+   "median_ratio": 10.29
+  },
+  {
+   "q": 3,
+   "n": 1275,
+   "lo": 21.0,
+   "hi": 33.0,
+   "median1086": 27.0,
+   "median2021": 200.0,
+   "median_ratio": 7.48
+  },
+  {
+   "q": 4,
+   "n": 1275,
+   "lo": 33.0,
+   "hi": 53.0,
+   "median1086": 40.0,
+   "median2021": 271.0,
+   "median_ratio": 6.75
+  },
+  {
+   "q": 5,
+   "n": 1275,
+   "lo": 53.0,
+   "hi": 1671.0,
+   "median1086": 74.0,
+   "median2021": 474.0,
+   "median_ratio": 5.66
+  }
+ ],
+ "place_alone": {
+  "n": 3862,
+  "pearson_log": 0.186,
+  "r2_log": 0.034,
+  "spearman": 0.215,
+  "slope": 0.291,
+  "intercept": 2.021
+ },
+ "models": {
+  "households": {
+   "n": 5799,
+   "r2": 0.053,
+   "coef": {
+    "lh86": 0.375
+   },
+   "p": {
+    "lh86": 0.0
+   }
+  },
+  "plus_wealth": {
+   "n": 5799,
+   "r2": 0.063,
+   "coef": {
+    "lh86": 0.372,
+    "lvph": 0.119,
+    "lpph": 0.115,
+    "mill": 0.058
+   },
+   "p": {
+    "lh86": 0.0,
+    "lvph": 0.0,
+    "lpph": 0.0059,
+    "mill": 0.0008
+   }
+  },
+  "plus_county": {
+   "n": 5799,
+   "r2": 0.135,
+   "coef": {
+    "lh86": 0.475,
+    "lvph": 0.097,
+    "lpph": 0.091,
+    "mill": 0.065
+   },
+   "p": {
+    "lh86": 0.0,
+    "lvph": 0.0013,
+    "lpph": 0.0445,
+    "mill": 0.0002
+   }
+  },
+  "county_only": {
+   "n": 5799,
+   "r2": 0.058,
+   "coef": {},
+   "p": {}
+  },
+  "households_county": {
+   "n": 5799,
+   "r2": 0.129,
+   "coef": {
+    "lh86": 0.483
+   },
+   "p": {
+    "lh86": 0.0
+   }
+  },
+  "plus_area": {
+   "n": 5799,
+   "r2": 0.19,
+   "coef": {
+    "lh86": 0.126,
+    "lvph": 0.097,
+    "lpph": -0.016,
+    "mill": 0.083,
+    "larea": 0.934
+   },
+   "p": {
+    "lh86": 0.0,
+    "lvph": 0.0,
+    "lpph": 0.6789,
+    "mill": 0.0,
+    "larea": 0.0
+   }
+  }
+ },
+ "models_note": "OLS on log10 2021 households, HC1 robust SEs; value per household in pence; plough teams per household; mill = any mill recorded",
+ "spearman_value1086": 0.231,
+ "spearman_ploughteams": 0.242,
+ "spearman_households_same_sample": 0.243,
+ "median_ratio_mill": 8.41,
+ "median_ratio_nomill": 9.36,
+ "by_county": [
+  {
+   "county": "Rutland",
+   "n": 24,
+   "pearson_log": 0.612,
+   "spearman": 0.566,
+   "slope": 1.028,
+   "median_ratio": 3.52,
+   "fewer_now_share": 0.083,
+   "households1086": 1442.0,
+   "households2021": 10620.0
+  },
+  {
+   "county": "Huntingdonshire",
+   "n": 61,
+   "pearson_log": 0.498,
+   "spearman": 0.565,
+   "slope": 1.025,
+   "median_ratio": 6.54,
+   "fewer_now_share": 0.016,
+   "households1086": 2604.0,
+   "households2021": 57751.0
+  },
+  {
+   "county": "Worcestershire",
+   "n": 134,
+   "pearson_log": 0.534,
+   "spearman": 0.556,
+   "slope": 0.896,
+   "median_ratio": 10.5,
+   "fewer_now_share": 0.0,
+   "households1086": 3816.0,
+   "households2021": 114354.0
+  },
+  {
+   "county": "Devon",
+   "n": 376,
+   "pearson_log": 0.493,
+   "spearman": 0.531,
+   "slope": 0.851,
+   "median_ratio": 6.78,
+   "fewer_now_share": 0.008,
+   "households1086": 15197.0,
+   "households2021": 275637.0
+  },
+  {
+   "county": "Shropshire",
+   "n": 177,
+   "pearson_log": 0.401,
+   "spearman": 0.444,
+   "slope": 0.547,
+   "median_ratio": 13.13,
+   "fewer_now_share": 0.017,
+   "households1086": 4570.0,
+   "households2021": 139487.0
+  },
+  {
+   "county": "Herefordshire",
+   "n": 150,
+   "pearson_log": 0.385,
+   "spearman": 0.443,
+   "slope": 0.513,
+   "median_ratio": 7.26,
+   "fewer_now_share": 0.0,
+   "households1086": 4186.0,
+   "households2021": 78665.0
+  },
+  {
+   "county": "Northamptonshire",
+   "n": 236,
+   "pearson_log": 0.326,
+   "spearman": 0.35,
+   "slope": 0.74,
+   "median_ratio": 9.13,
+   "fewer_now_share": 0.013,
+   "households1086": 6355.0,
+   "households2021": 269429.0
+  },
+  {
+   "county": "Buckinghamshire",
+   "n": 156,
+   "pearson_log": 0.314,
+   "spearman": 0.341,
+   "slope": 0.729,
+   "median_ratio": 13.53,
+   "fewer_now_share": 0.013,
+   "households1086": 4753.0,
+   "households2021": 224075.0
+  },
+  {
+   "county": "Kent",
+   "n": 169,
+   "pearson_log": 0.329,
+   "spearman": 0.327,
+   "slope": 0.343,
+   "median_ratio": 16.0,
+   "fewer_now_share": 0.012,
+   "households1086": 8880.0,
+   "households2021": 199020.0
+  },
+  {
+   "county": "Berkshire",
+   "n": 141,
+   "pearson_log": 0.277,
+   "spearman": 0.319,
+   "slope": 0.631,
+   "median_ratio": 8.74,
+   "fewer_now_share": 0.021,
+   "households1086": 5861.0,
+   "households2021": 188135.0
+  },
+  {
+   "county": "Cambridgeshire",
+   "n": 110,
+   "pearson_log": 0.197,
+   "spearman": 0.315,
+   "slope": 0.448,
+   "median_ratio": 11.38,
+   "fewer_now_share": 0.009,
+   "households1086": 4214.0,
+   "households2021": 109135.0
+  },
+  {
+   "county": "Surrey",
+   "n": 43,
+   "pearson_log": 0.298,
+   "spearman": 0.309,
+   "slope": 0.403,
+   "median_ratio": 25.57,
+   "fewer_now_share": 0.023,
+   "households1086": 1528.0,
+   "households2021": 70756.0
+  },
+  {
+   "county": "Oxfordshire",
+   "n": 160,
+   "pearson_log": 0.319,
+   "spearman": 0.308,
+   "slope": 0.553,
+   "median_ratio": 6.44,
+   "fewer_now_share": 0.05,
+   "households1086": 6354.0,
+   "households2021": 126965.0
+  },
+  {
+   "county": "Somerset",
+   "n": 308,
+   "pearson_log": 0.304,
+   "spearman": 0.301,
+   "slope": 0.501,
+   "median_ratio": 9.18,
+   "fewer_now_share": 0.01,
+   "households1086": 11014.0,
+   "households2021": 294235.0
+  },
+  {
+   "county": "Norfolk",
+   "n": 419,
+   "pearson_log": 0.258,
+   "spearman": 0.292,
+   "slope": 0.33,
+   "median_ratio": 5.15,
+   "fewer_now_share": 0.057,
+   "households1086": 23598.0,
+   "households2021": 241410.0
+  },
+  {
+   "county": "Yorkshire",
+   "n": 455,
+   "pearson_log": 0.306,
+   "spearman": 0.291,
+   "slope": 0.512,
+   "median_ratio": 23.12,
+   "fewer_now_share": 0.011,
+   "households1086": 6733.0,
+   "households2021": 439478.0
+  },
+  {
+   "county": "Suffolk",
+   "n": 384,
+   "pearson_log": 0.24,
+   "spearman": 0.285,
+   "slope": 0.346,
+   "median_ratio": 5.26,
+   "fewer_now_share": 0.068,
+   "households1086": 16839.0,
+   "households2021": 206123.0
+  },
+  {
+   "county": "Bedfordshire",
+   "n": 102,
+   "pearson_log": 0.345,
+   "spearman": 0.268,
+   "slope": 0.848,
+   "median_ratio": 17.15,
+   "fewer_now_share": 0.02,
+   "households1086": 3387.0,
+   "households2021": 142161.0
+  },
+  {
+   "county": "Wiltshire",
+   "n": 187,
+   "pearson_log": 0.285,
+   "spearman": 0.263,
+   "slope": 0.475,
+   "median_ratio": 8.3,
+   "fewer_now_share": 0.021,
+   "households1086": 8406.0,
+   "households2021": 253956.0
+  },
+  {
+   "county": "Hertfordshire",
+   "n": 92,
+   "pearson_log": 0.248,
+   "spearman": 0.248,
+   "slope": 0.5,
+   "median_ratio": 11.58,
+   "fewer_now_share": 0.011,
+   "households1086": 3824.0,
+   "households2021": 164175.0
+  },
+  {
+   "county": "Dorset",
+   "n": 185,
+   "pearson_log": 0.183,
+   "spearman": 0.238,
+   "slope": 0.359,
+   "median_ratio": 5.38,
+   "fewer_now_share": 0.081,
+   "households1086": 6686.0,
+   "households2021": 158672.0
+  },
+  {
+   "county": "Essex",
+   "n": 216,
+   "pearson_log": 0.191,
+   "spearman": 0.236,
+   "slope": 0.305,
+   "median_ratio": 12.06,
+   "fewer_now_share": 0.0,
+   "households1086": 9395.0,
+   "households2021": 289173.0
+  },
+  {
+   "county": "Cheshire",
+   "n": 166,
+   "pearson_log": 0.2,
+   "spearman": 0.227,
+   "slope": 0.363,
+   "median_ratio": 56.68,
+   "fewer_now_share": 0.012,
+   "households1086": 1390.0,
+   "households2021": 257159.0
+  },
+  {
+   "county": "Gloucestershire",
+   "n": 207,
+   "pearson_log": 0.211,
+   "spearman": 0.226,
+   "slope": 0.348,
+   "median_ratio": 8.54,
+   "fewer_now_share": 0.014,
+   "households1086": 7525.0,
+   "households2021": 164046.0
+  },
+  {
+   "county": "Lincolnshire",
+   "n": 467,
+   "pearson_log": 0.168,
+   "spearman": 0.218,
+   "slope": 0.345,
+   "median_ratio": 3.8,
+   "fewer_now_share": 0.137,
+   "households1086": 21480.0,
+   "households2021": 246021.0
+  },
+  {
+   "county": "Leicestershire",
+   "n": 173,
+   "pearson_log": 0.118,
+   "spearman": 0.171,
+   "slope": 0.186,
+   "median_ratio": 12.72,
+   "fewer_now_share": 0.029,
+   "households1086": 5562.0,
+   "households2021": 173220.0
+  },
+  {
+   "county": "Warwickshire",
+   "n": 172,
+   "pearson_log": 0.172,
+   "spearman": 0.166,
+   "slope": 0.321,
+   "median_ratio": 7.56,
+   "fewer_now_share": 0.047,
+   "households1086": 5578.0,
+   "households2021": 197138.0
+  },
+  {
+   "county": "Staffordshire",
+   "n": 108,
+   "pearson_log": 0.201,
+   "spearman": 0.154,
+   "slope": 0.312,
+   "median_ratio": 32.88,
+   "fewer_now_share": 0.0,
+   "households1086": 2376.0,
+   "households2021": 158485.0
+  },
+  {
+   "county": "Cornwall",
+   "n": 133,
+   "pearson_log": 0.141,
+   "spearman": 0.143,
+   "slope": 0.17,
+   "median_ratio": 17.4,
+   "fewer_now_share": 0.0,
+   "households1086": 5081.0,
+   "households2021": 160424.0
+  },
+  {
+   "county": "Hampshire",
+   "n": 195,
+   "pearson_log": 0.107,
+   "spearman": 0.115,
+   "slope": 0.159,
+   "median_ratio": 13.23,
+   "fewer_now_share": 0.015,
+   "households1086": 8448.0,
+   "households2021": 270504.0
+  },
+  {
+   "county": "Derbyshire",
+   "n": 130,
+   "pearson_log": 0.132,
+   "spearman": 0.106,
+   "slope": 0.261,
+   "median_ratio": 33.66,
+   "fewer_now_share": 0.023,
+   "households1086": 2268.0,
+   "households2021": 147884.0
+  },
+  {
+   "county": "Nottinghamshire",
+   "n": 174,
+   "pearson_log": 0.086,
+   "spearman": 0.085,
+   "slope": 0.167,
+   "median_ratio": 7.96,
+   "fewer_now_share": 0.046,
+   "households1086": 4686.0,
+   "households2021": 128317.0
+  },
+  {
+   "county": "Sussex",
+   "n": 166,
+   "pearson_log": 0.018,
+   "spearman": 0.014,
+   "slope": 0.024,
+   "median_ratio": 14.66,
+   "fewer_now_share": 0.054,
+   "households1086": 7918.0,
+   "households2021": 240793.0
+  }
+ ],
+ "county_spearman_max": {
+  "county": "Rutland",
+  "n": 24,
+  "pearson_log": 0.612,
+  "spearman": 0.566,
+  "slope": 1.028,
+  "median_ratio": 3.52,
+  "fewer_now_share": 0.083,
+  "households1086": 1442.0,
+  "households2021": 10620.0
+ },
+ "county_spearman_min": {
+  "county": "Sussex",
+  "n": 166,
+  "pearson_log": 0.018,
+  "spearman": 0.014,
+  "slope": 0.024,
+  "median_ratio": 14.66,
+  "fewer_now_share": 0.054,
+  "households1086": 7918.0,
+  "households2021": 240793.0
+ },
+ "counties_n": 33,
+ "counties_spearman_over_04": 6,
+ "counties_spearman_under_02": 8,
+ "county_aggregate": {
+  "n": 33,
+  "pearson_log": 0.607,
+  "spearman": 0.7
+ },
+ "league_flag_excluded": 137,
+ "fallers": [
+  {
+   "parish": "Waddingworth",
+   "district": "East Lindsey",
+   "county": "Lincolnshire",
+   "places": "Waddingworth",
+   "nPlaces": 1,
+   "households1086": 60.0,
+   "households2021": 3,
+   "residents2021": 7,
+   "ratio": 0.05
+  },
+  {
+   "parish": "Stanford",
+   "district": "Breckland",
+   "county": "Norfolk",
+   "places": "Buckenham [Tofts]; Stanford",
+   "nPlaces": 2,
+   "households1086": 52.0,
+   "households2021": 4,
+   "residents2021": 11,
+   "ratio": 0.08
+  },
+  {
+   "parish": "Westrill and Starmore",
+   "district": "Harborough",
+   "county": "Northamptonshire",
+   "places": "Stanford [on Avon]; `Stormesworth'",
+   "nPlaces": 2,
+   "households1086": 37.0,
+   "households2021": 3,
+   "residents2021": 8,
+   "ratio": 0.08
+  },
+  {
+   "parish": "Wantisden",
+   "district": "East Suffolk",
+   "county": "Suffolk",
+   "places": "Butley; Staverton; Wantisden",
+   "nPlaces": 3,
+   "households1086": 116.5,
+   "households2021": 11,
+   "residents2021": 27,
+   "ratio": 0.09
+  },
+  {
+   "parish": "Scrivelsby",
+   "district": "East Lindsey",
+   "county": "Lincolnshire",
+   "places": "Scrivelsby; [Wood] Enderby",
+   "nPlaces": 2,
+   "households1086": 111.0,
+   "households2021": 17,
+   "residents2021": 52,
+   "ratio": 0.15
+  },
+  {
+   "parish": "Haugh",
+   "district": "East Lindsey",
+   "county": "Lincolnshire",
+   "places": "Haugh",
+   "nPlaces": 1,
+   "households1086": 38.0,
+   "households2021": 6,
+   "residents2021": 18,
+   "ratio": 0.16
+  },
+  {
+   "parish": "Langton",
+   "district": "East Lindsey",
+   "county": "Lincolnshire",
+   "places": "Langton; {Torp}",
+   "nPlaces": 2,
+   "households1086": 81.0,
+   "households2021": 14,
+   "residents2021": 36,
+   "ratio": 0.17
+  },
+  {
+   "parish": "Hodnell and Wills Pastures",
+   "district": "Stratford-on-Avon",
+   "county": "Warwickshire",
+   "places": "Hodnell",
+   "nPlaces": 1,
+   "households1086": 32.0,
+   "households2021": 6,
+   "residents2021": 13,
+   "ratio": 0.19
+  },
+  {
+   "parish": "Stratton Hall",
+   "district": "East Suffolk",
+   "county": "Suffolk",
+   "places": "Stratton; {Leofstanestuna}",
+   "nPlaces": 2,
+   "households1086": 46.5,
+   "households2021": 9,
+   "residents2021": 26,
+   "ratio": 0.19
+  },
+  {
+   "parish": "Stockton",
+   "district": "South Norfolk",
+   "county": "Norfolk",
+   "places": "Stockton",
+   "nPlaces": 1,
+   "households1086": 123.0,
+   "households2021": 25,
+   "residents2021": 64,
+   "ratio": 0.2
+  },
+  {
+   "parish": "Stockerston",
+   "district": "Harborough",
+   "county": "Leicestershire",
+   "places": "Holyoaks; Stockerston",
+   "nPlaces": 2,
+   "households1086": 67.0,
+   "households2021": 15,
+   "residents2021": 32,
+   "ratio": 0.22
+  },
+  {
+   "parish": "Chilcomb",
+   "district": "Winchester",
+   "county": "Hampshire",
+   "places": "Chilcomb",
+   "nPlaces": 1,
+   "households1086": 213.0,
+   "households2021": 48,
+   "residents2021": 118,
+   "ratio": 0.23
+  },
+  {
+   "parish": "Southease",
+   "district": "Lewes",
+   "county": "Sussex",
+   "places": "Harpingden; Southease",
+   "nPlaces": 2,
+   "households1086": 80.0,
+   "households2021": 18,
+   "residents2021": 49,
+   "ratio": 0.23
+  },
+  {
+   "parish": "Ramsholt",
+   "district": "East Suffolk",
+   "county": "Suffolk",
+   "places": "Peyton; Ramsholt",
+   "nPlaces": 2,
+   "households1086": 47.0,
+   "households2021": 11,
+   "residents2021": 24,
+   "ratio": 0.23
+  },
+  {
+   "parish": "North Poorton",
+   "district": "Dorset",
+   "county": "Dorset",
+   "places": "Poorton",
+   "nPlaces": 1,
+   "households1086": 34.0,
+   "households2021": 8,
+   "residents2021": 19,
+   "ratio": 0.23
+  },
+  {
+   "parish": "Fulnetby",
+   "district": "West Lindsey",
+   "county": "Lincolnshire",
+   "places": "Fulnetby; Rand",
+   "nPlaces": 2,
+   "households1086": 25.0,
+   "households2021": 6,
+   "residents2021": 12,
+   "ratio": 0.24
+  },
+  {
+   "parish": "Rigsby with Ailby",
+   "district": "East Lindsey",
+   "county": "Lincolnshire",
+   "places": "Ailby; Rigsby; Rigsby; {Tatebi}",
+   "nPlaces": 4,
+   "households1086": 31.0,
+   "households2021": 8,
+   "residents2021": 18,
+   "ratio": 0.26
+  },
+  {
+   "parish": "Sarsden",
+   "district": "West Oxfordshire",
+   "county": "Oxfordshire",
+   "places": "Sarsden",
+   "nPlaces": 1,
+   "households1086": 97.0,
+   "households2021": 27,
+   "residents2021": 64,
+   "ratio": 0.28
+  },
+  {
+   "parish": "Flixton (Lothingland Ward)",
+   "district": "East Suffolk",
+   "county": "Suffolk",
+   "places": "Flixton",
+   "nPlaces": 1,
+   "households1086": 67.0,
+   "households2021": 20,
+   "residents2021": 42,
+   "ratio": 0.3
+  },
+  {
+   "parish": "South Stoke",
+   "district": "Arun",
+   "county": "Sussex",
+   "places": "Offham; [North] Stoke; [South] Stoke",
+   "nPlaces": 3,
+   "households1086": 69.0,
+   "households2021": 21,
+   "residents2021": 51,
+   "ratio": 0.3
+  }
+ ],
+ "fallers_n_eligible": 4058,
+ "fallers_fewer_now": 185,
+ "fallers_fewer_now_by_county": [
+  {
+   "county": "Lincolnshire",
+   "n": 61
+  },
+  {
+   "county": "Suffolk",
+   "n": 23
+  },
+  {
+   "county": "Norfolk",
+   "n": 21
+  },
+  {
+   "county": "Dorset",
+   "n": 9
+  },
+  {
+   "county": "Sussex",
+   "n": 8
+  },
+  {
+   "county": "Nottinghamshire",
+   "n": 8
+  },
+  {
+   "county": "Oxfordshire",
+   "n": 6
+  },
+  {
+   "county": "Warwickshire",
+   "n": 6
+  },
+  {
+   "county": "Leicestershire",
+   "n": 5
+  },
+  {
+   "county": "Wiltshire",
+   "n": 4
+  },
+  {
+   "county": "Derbyshire",
+   "n": 3
+  },
+  {
+   "county": "Devon",
+   "n": 3
+  },
+  {
+   "county": "Gloucestershire",
+   "n": 3
+  },
+  {
+   "county": "Hampshire",
+   "n": 3
+  },
+  {
+   "county": "Northamptonshire",
+   "n": 3
+  },
+  {
+   "county": "Somerset",
+   "n": 3
+  },
+  {
+   "county": "Shropshire",
+   "n": 3
+  },
+  {
+   "county": "Berkshire",
+   "n": 2
+  },
+  {
+   "county": "Kent",
+   "n": 2
+  },
+  {
+   "county": "Bedfordshire",
+   "n": 2
+  },
+  {
+   "county": "Rutland",
+   "n": 1
+  },
+  {
+   "county": "Buckinghamshire",
+   "n": 1
+  },
+  {
+   "county": "Huntingdonshire",
+   "n": 1
+  },
+  {
+   "county": "Cambridgeshire",
+   "n": 1
+  },
+  {
+   "county": "Yorkshire",
+   "n": 1
+  },
+  {
+   "county": "Surrey",
+   "n": 1
+  },
+  {
+   "county": "Cheshire",
+   "n": 1
+  }
+ ],
+ "risers": [
+  {
+   "parish": "Bracknell",
+   "district": "Bracknell Forest",
+   "county": "Berkshire",
+   "places": "Easthampstead",
+   "nPlaces": 1,
+   "households1086": 14.0,
+   "households2021": 24518,
+   "residents2021": 60077,
+   "ratio": 1751.29
+  },
+  {
+   "parish": "Crewe",
+   "district": "Cheshire East",
+   "county": "Cheshire",
+   "places": "Coppenhall; Crewe; Worleston",
+   "nPlaces": 3,
+   "households1086": 15.0,
+   "households2021": 23730,
+   "residents2021": 55315,
+   "ratio": 1582.0
+  },
+  {
+   "parish": "Bridlington",
+   "district": "East Riding of Yorkshire",
+   "county": "Yorkshire",
+   "places": "Bridlington; Hilderthorpe; Marton; Sewerby; Wilsthorpe",
+   "nPlaces": 5,
+   "households1086": 14.0,
+   "households2021": 16705,
+   "residents2021": 35026,
+   "ratio": 1193.21
+  },
+  {
+   "parish": "Ryde",
+   "district": "Isle of Wight",
+   "county": "Hampshire",
+   "places": "Binstead; Preston",
+   "nPlaces": 2,
+   "households1086": 10.0,
+   "households2021": 11324,
+   "residents2021": 24100,
+   "ratio": 1132.4
+  },
+  {
+   "parish": "Shenley Brook End",
+   "district": "Milton Keynes",
+   "county": "Buckinghamshire",
+   "places": "Shenley [Brook End]",
+   "nPlaces": 1,
+   "households1086": 10.0,
+   "households2021": 10243,
+   "residents2021": 27082,
+   "ratio": 1024.3
+  },
+  {
+   "parish": "Sutton Coldfield",
+   "district": "Birmingham",
+   "county": "Warwickshire",
+   "places": "Curdworth; Minworth; Sutton [Coldfield]; Wiggins Hill",
+   "nPlaces": 4,
+   "households1086": 49.0,
+   "households2021": 40272,
+   "residents2021": 96475,
+   "ratio": 821.88
+  },
+  {
+   "parish": "Portishead",
+   "district": "North Somerset",
+   "county": "Somerset",
+   "places": "Portishead",
+   "nPlaces": 1,
+   "households1086": 14.0,
+   "households2021": 11477,
+   "residents2021": 26305,
+   "ratio": 819.79
+  },
+  {
+   "parish": "Corby Town",
+   "district": "North Northamptonshire",
+   "county": "Northamptonshire",
+   "places": "Corby; [Great] Oakley",
+   "nPlaces": 2,
+   "households1086": 32.0,
+   "households2021": 24624,
+   "residents2021": 62341,
+   "ratio": 769.5
+  },
+  {
+   "parish": "Sandbach",
+   "district": "Cheshire East",
+   "county": "Cheshire",
+   "places": "Sandbach; Wheelock",
+   "nPlaces": 2,
+   "households1086": 13.0,
+   "households2021": 9847,
+   "residents2021": 21923,
+   "ratio": 757.46
+  },
+  {
+   "parish": "Chichester",
+   "district": "Chichester",
+   "county": "Sussex",
+   "places": "Chichester; Fishbourne",
+   "nPlaces": 2,
+   "households1086": 18.0,
+   "households2021": 13263,
+   "residents2021": 29407,
+   "ratio": 736.83
+  },
+  {
+   "parish": "Central Swindon South",
+   "district": "Swindon",
+   "county": "Wiltshire",
+   "places": "Swindon; Walcot; Westlecott",
+   "nPlaces": 3,
+   "households1086": 37.0,
+   "households2021": 25153,
+   "residents2021": 62932,
+   "ratio": 679.81
+  },
+  {
+   "parish": "Cottingham",
+   "district": "East Riding of Yorkshire",
+   "county": "Yorkshire",
+   "places": "Cottingham",
+   "nPlaces": 1,
+   "households1086": 11.5,
+   "households2021": 7771,
+   "residents2021": 16947,
+   "ratio": 675.74
+  },
+  {
+   "parish": "Trowbridge",
+   "district": "Wiltshire",
+   "county": "Wiltshire",
+   "places": "Trowbridge",
+   "nPlaces": 1,
+   "households1086": 24.0,
+   "households2021": 16139,
+   "residents2021": 37647,
+   "ratio": 672.46
+  },
+  {
+   "parish": "Dronfield",
+   "district": "North East Derbyshire",
+   "county": "Derbyshire",
+   "places": "Dronfield; [Coal] Aston; `Upton'",
+   "nPlaces": 3,
+   "households1086": 15.0,
+   "households2021": 9455,
+   "residents2021": 21161,
+   "ratio": 630.33
+  },
+  {
+   "parish": "Braunstone",
+   "district": "Blaby",
+   "county": "Leicestershire",
+   "places": "Braunstone",
+   "nPlaces": 1,
+   "households1086": 11.0,
+   "households2021": 6901,
+   "residents2021": 17506,
+   "ratio": 627.36
+  },
+  {
+   "parish": "Kenilworth",
+   "district": "Warwick",
+   "county": "Warwickshire",
+   "places": "Kenilworth; Roundshill",
+   "nPlaces": 2,
+   "households1086": 17.0,
+   "households2021": 10078,
+   "residents2021": 22694,
+   "ratio": 592.82
+  },
+  {
+   "parish": "Royal Leamington Spa",
+   "district": "Warwick",
+   "county": "Warwickshire",
+   "places": "Leamington [Priors]; Newbold [Comyn]",
+   "nPlaces": 2,
+   "households1086": 37.0,
+   "households2021": 21862,
+   "residents2021": 50699,
+   "ratio": 590.87
+  },
+  {
+   "parish": "Ripley",
+   "district": "Amber Valley",
+   "county": "Derbyshire",
+   "places": "Ripley",
+   "nPlaces": 1,
+   "households1086": 16.0,
+   "households2021": 9389,
+   "residents2021": 20633,
+   "ratio": 586.81
+  },
+  {
+   "parish": "Gainsborough",
+   "district": "West Lindsey",
+   "county": "Lincolnshire",
+   "places": "Gainsborough",
+   "nPlaces": 1,
+   "households1086": 16.0,
+   "households2021": 9279,
+   "residents2021": 20536,
+   "ratio": 579.94
+  },
+  {
+   "parish": "Littlehampton",
+   "district": "Arun",
+   "county": "Sussex",
+   "places": "Littlehampton; Toddington",
+   "nPlaces": 2,
+   "households1086": 24.0,
+   "households2021": 13895,
+   "residents2021": 32291,
+   "ratio": 578.96
+  }
+ ],
+ "nobodies": [
+  {
+   "parish": "Macclesfield",
+   "district": "Cheshire East",
+   "county": "Cheshire",
+   "places": "Macclesfield",
+   "nPlaces": 1,
+   "households1086": 4.0,
+   "households2021": 24195,
+   "residents2021": 52508,
+   "ratio": 6048.75
+  },
+  {
+   "parish": "Elstree and Borehamwood",
+   "district": "Hertsmere",
+   "county": "Hertfordshire",
+   "places": "Theobald Street",
+   "nPlaces": 1,
+   "households1086": 4.0,
+   "households2021": 16025,
+   "residents2021": 41419,
+   "ratio": 4006.25
+  },
+  {
+   "parish": "Winsford",
+   "district": "Cheshire West and Chester",
+   "county": "Cheshire",
+   "places": "Clive; Over; Wharton",
+   "nPlaces": 3,
+   "households1086": 5.0,
+   "households2021": 14037,
+   "residents2021": 33546,
+   "ratio": 2807.4
+  },
+  {
+   "parish": "Ecclesfield",
+   "district": "Sheffield",
+   "county": "Yorkshire",
+   "places": "Ecclesfield",
+   "nPlaces": 1,
+   "households1086": 4.0,
+   "households2021": 13909,
+   "residents2021": 31125,
+   "ratio": 3477.25
+  },
+  {
+   "parish": "East Grinstead",
+   "district": "Mid Sussex",
+   "county": "Sussex",
+   "places": "Brockhurst; Fairlight; Hazelden; Standen; `Warley'",
+   "nPlaces": 5,
+   "households1086": 5.0,
+   "households2021": 11864,
+   "residents2021": 27785,
+   "ratio": 2372.8
+  },
+  {
+   "parish": "March",
+   "district": "Fenland",
+   "county": "Cambridgeshire",
+   "places": "March",
+   "nPlaces": 1,
+   "households1086": 3.0,
+   "households2021": 9989,
+   "residents2021": 22963,
+   "ratio": 3329.67
+  },
+  {
+   "parish": "Skegness",
+   "district": "East Lindsey",
+   "county": "Lincolnshire",
+   "places": "{Tric}",
+   "nPlaces": 1,
+   "households1086": 4.8,
+   "households2021": 9808,
+   "residents2021": 21127,
+   "ratio": 2064.84
+  },
+  {
+   "parish": "Truro",
+   "district": "Cornwall",
+   "county": "Cornwall",
+   "places": "`Trehaverne'",
+   "nPlaces": 1,
+   "households1086": 2.0,
+   "households2021": 9583,
+   "residents2021": 21046,
+   "ratio": 4791.5
+  },
+  {
+   "parish": "Buckley",
+   "district": "Flintshire",
+   "county": "Cheshire",
+   "places": "Bistre",
+   "nPlaces": 1,
+   "households1086": 5.0,
+   "households2021": 7133,
+   "residents2021": 16124,
+   "ratio": 1426.6
+  },
+  {
+   "parish": "Ilkley",
+   "district": "Bradford",
+   "county": "Yorkshire",
+   "places": "Ilkley; Stubham",
+   "nPlaces": 2,
+   "households1086": 1.0,
+   "households2021": 6737,
+   "residents2021": 15035,
+   "ratio": 6737.0
+  },
+  {
+   "parish": "Highcliffe and Walkford",
+   "district": "Bournemouth, Christchurch and Poole",
+   "county": "Dorset",
+   "places": "Hoburne",
+   "nPlaces": 1,
+   "households1086": 2.0,
+   "households2021": 6571,
+   "residents2021": 13725,
+   "ratio": 3285.5
+  },
+  {
+   "parish": "Carterton",
+   "district": "West Oxfordshire",
+   "county": "Oxfordshire",
+   "places": "Pemscott",
+   "nPlaces": 1,
+   "households1086": 4.5,
+   "households2021": 6276,
+   "residents2021": 15682,
+   "ratio": 1394.67
+  },
+  {
+   "parish": "Chepping Wycombe",
+   "district": "Buckinghamshire",
+   "county": "Buckinghamshire",
+   "places": "Lude",
+   "nPlaces": 1,
+   "households1086": 4.0,
+   "households2021": 5929,
+   "residents2021": 14537,
+   "ratio": 1482.25
+  },
+  {
+   "parish": "Kesgrave",
+   "district": "East Suffolk",
+   "county": "Suffolk",
+   "places": "Kesgrave",
+   "nPlaces": 1,
+   "households1086": 4.0,
+   "households2021": 5654,
+   "residents2021": 13958,
+   "ratio": 1413.5
+  },
+  {
+   "parish": "Heathfield and Waldron",
+   "district": "Wealden",
+   "county": "Sussex",
+   "places": "Waldron",
+   "nPlaces": 1,
+   "households1086": 2.0,
+   "households2021": 5371,
+   "residents2021": 12278,
+   "ratio": 2685.5
+  }
+ ],
+ "nobodies_n_tiny": 490,
+ "nohh_parishes": 1077,
+ "nohh_biggest": [
+  {
+   "parish": "Keighley",
+   "district": "Bradford",
+   "places": "Hainworth; Keighley; Laycock; Newsholme; Oakworth; Riddlesden; Utley",
+   "households2021": 22626
+  },
+  {
+   "parish": "Bury St Edmunds",
+   "district": "West Suffolk",
+   "places": "Bury [St Edmund's]",
+   "households2021": 19258
+  },
+  {
+   "parish": "Dunstable",
+   "district": "Central Bedfordshire",
+   "places": "Dunstable",
+   "households2021": 16704
+  },
+  {
+   "parish": "Morley",
+   "district": "Leeds",
+   "places": "Morley",
+   "households2021": 16311
+  },
+  {
+   "parish": "Morecambe",
+   "district": "Lancaster",
+   "places": "Bare; Poulton [Hall]; Torisholme",
+   "households2021": 15802
+  },
+  {
+   "parish": "Kendal",
+   "district": "South Lakeland",
+   "places": "Kendal",
+   "households2021": 13604
+  },
+  {
+   "parish": "Holme Valley",
+   "district": "Kirklees",
+   "places": "Austonley; Cartworth; Fulstone; Hepworth; Holme; Honley; Wooldale; [Upper]thong; [Yate]holme",
+   "households2021": 11884
+  },
+  {
+   "parish": "Rhyl",
+   "district": "Denbighshire",
+   "places": "Cefn Du; Cwybr Bach; Rhyd Orddwy",
+   "households2021": 11773
+  }
+ ],
+ "biggest1086": [
+  {
+   "parish": "Thetford",
+   "district": "Breckland",
+   "county": "Norfolk",
+   "places": "Thetford",
+   "nPlaces": 1,
+   "households1086": 1671.0,
+   "households2021": 10287,
+   "residents2021": 25257,
+   "ratio": 6.16,
+   "flagTotal": false
+  },
+  {
+   "parish": "Leominster",
+   "district": "Herefordshire, County of",
+   "county": "Herefordshire",
+   "places": "Brierley; Broadward; Cholstrey; Eaton; Ivington; Leominster; Wharton",
+   "nPlaces": 7,
+   "households1086": 816.0,
+   "households2021": 5456,
+   "residents2021": 11954,
+   "ratio": 6.69,
+   "flagTotal": true
+  },
+  {
+   "parish": "Berkeley",
+   "district": "Stroud",
+   "county": "Gloucestershire",
+   "places": "Berkeley",
+   "nPlaces": 1,
+   "households1086": 579.0,
+   "households2021": 987,
+   "residents2021": 2174,
+   "ratio": 1.71,
+   "flagTotal": true
+  },
+  {
+   "parish": "Rothley",
+   "district": "Charnwood",
+   "county": "Leicestershire",
+   "places": "Rothley",
+   "nPlaces": 1,
+   "households1086": 503.0,
+   "households2021": 2310,
+   "residents2021": 5633,
+   "ratio": 4.59,
+   "flagTotal": false
+  },
+  {
+   "parish": "Huntingdon",
+   "district": "Huntingdonshire",
+   "county": "Huntingdonshire",
+   "places": "Botolph Bridge; Hartford; Huntingdon",
+   "nPlaces": 3,
+   "households1086": 465.0,
+   "households2021": 10522,
+   "residents2021": 25432,
+   "ratio": 22.63,
+   "flagTotal": false
+  },
+  {
+   "parish": "Aldington",
+   "district": "Ashford",
+   "county": "Kent",
+   "places": "Aldington; Stansted; Stansted",
+   "nPlaces": 3,
+   "households1086": 461.0,
+   "households2021": 582,
+   "residents2021": 1456,
+   "ratio": 1.26,
+   "flagTotal": false
+  },
+  {
+   "parish": "Folkestone",
+   "district": "Folkestone and Hythe",
+   "county": "Kent",
+   "places": "Folkestone; {Suestone}",
+   "nPlaces": 2,
+   "households1086": 396.0,
+   "households2021": 20946,
+   "residents2021": 47356,
+   "ratio": 52.89,
+   "flagTotal": true
+  },
+  {
+   "parish": "Wymondham",
+   "district": "South Norfolk",
+   "county": "Norfolk",
+   "places": "Dykebeck; Wymondham",
+   "nPlaces": 2,
+   "households1086": 380.0,
+   "households2021": 7737,
+   "residents2021": 17498,
+   "ratio": 20.36,
+   "flagTotal": false
+  },
+  {
+   "parish": "Crediton",
+   "district": "Mid Devon",
+   "county": "Devon",
+   "places": "Crediton",
+   "nPlaces": 1,
+   "households1086": 377.0,
+   "households2021": 3732,
+   "residents2021": 8152,
+   "ratio": 9.9,
+   "flagTotal": false
+  },
+  {
+   "parish": "Steyning",
+   "district": "Horsham",
+   "county": "Sussex",
+   "places": "Steyning; Wappingthorne",
+   "nPlaces": 2,
+   "households1086": 350.0,
+   "households2021": 2666,
+   "residents2021": 5836,
+   "ratio": 7.62,
+   "flagTotal": false
+  },
+  {
+   "parish": "Ringmer",
+   "district": "Lewes",
+   "county": "Sussex",
+   "places": "[South] Malling",
+   "nPlaces": 1,
+   "households1086": 310.0,
+   "households2021": 2025,
+   "residents2021": 4767,
+   "ratio": 6.53,
+   "flagTotal": false
+  },
+  {
+   "parish": "Hythe",
+   "district": "Folkestone and Hythe",
+   "county": "Kent",
+   "places": "Hythe; Newington; Saltwood",
+   "nPlaces": 3,
+   "households1086": 296.0,
+   "households2021": 7133,
+   "residents2021": 14980,
+   "ratio": 24.1,
+   "flagTotal": true
+  }
+ ],
+ "thresholds": {
+  "min_fall": 20,
+  "min_ratio": 10,
+  "tiny": 5
+ },
+ "example_waddingworth": {
+  "name": "Waddingworth",
+  "county": "Lincolnshire",
+  "households1086": 60.0,
+  "parish": "Waddingworth",
+  "parishHouseholds2021": 3.0,
+  "parishResidents2021": 7.0,
+  "parishPlaces": 1.0,
+  "entries": "Lincolnshire 3,12 (20); Lincolnshire 29,6 (40)"
+ },
+ "example_abberley": {
+  "name": "Abberley",
+  "county": "Worcestershire",
+  "households1086": 32.0,
+  "parish": "Abberley",
+  "parishHouseholds2021": 288.0,
+  "parishResidents2021": 786.0,
+  "parishPlaces": 1.0,
+  "entries": "Worcestershire 15,8 (32)"
+ },
+ "example_norwich": {
+  "name": "Norwich",
+  "county": "Norfolk",
+  "households1086": 1829.0,
+  "parish": "Norwich, unparished area",
+  "parishHouseholds2021": null,
+  "parishResidents2021": null,
+  "parishPlaces": 9.0,
+  "entries": "Norfolk 1,61 (1829)"
+ }
+}
