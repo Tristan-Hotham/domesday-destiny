@@ -49,7 +49,7 @@ It needs Python 3 with pyyaml, pandas, numpy, scipy, statsmodels and playwright.
 - Joined data: the realm-domesday repository by embabel-worlds, https://github.com/embabel-worlds/realm-domesday
 - Place links: Open Domesday by Anna Powell-Smith, https://opendomesday.org/
 - Census 2021: Office for National Statistics, licensed under the Open Government Licence v3.0. Contains OS data © Crown copyright and database right 2022.
-- Base map tiles: © OpenStreetMap contributors © CARTO.
+- Base map tiles: © Esri, HERE, Garmin, © OpenStreetMap contributors, and the GIS user community.
 
 Because the Domesday figures are CC BY-NC-SA, the derived data (`data/`) and the page text are released under CC BY-NC-SA 4.0 (https://creativecommons.org/licenses/by-nc-sa/4.0/). The code (`code/`) is released under the MIT licence (see `LICENSE`).
 

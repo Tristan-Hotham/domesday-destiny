@@ -263,7 +263,7 @@ footer p{margin:0 0 10px}
 <footer>
   <p>Dr Tristan Hotham, Independent researcher.</p>
   <p>I wrote the text, with drafting and editing assistance from Claude (Anthropic), which also helped prepare the analysis code. I reviewed and checked all text and results.</p>
-  <p>Domesday data: Hull Domesday Project, Professor J.J.N. Palmer, George Slater and the University of Hull (CC BY-NC-SA). Joined data: the realm-domesday repository (embabel-worlds). Place links: Open Domesday by Anna Powell-Smith. Census 2021: Office for National Statistics, licensed under the Open Government Licence v3.0; contains OS data © Crown copyright and database right 2022. Base map © OpenStreetMap contributors © CARTO.</p>
+  <p>Domesday data: Hull Domesday Project, Professor J.J.N. Palmer, George Slater and the University of Hull (CC BY-NC-SA). Joined data: the realm-domesday repository (embabel-worlds). Place links: Open Domesday by Anna Powell-Smith. Census 2021: Office for National Statistics, licensed under the Open Government Licence v3.0; contains OS data © Crown copyright and database right 2022. Base map tiles © Esri, HERE, Garmin, © OpenStreetMap contributors, and the GIS user community.</p>
   <p>Because the Domesday figures are CC BY-NC-SA, the derived data and the text of this page are released under CC BY-NC-SA 4.0. The code is released under the MIT licence.</p>
 </footer>
 </div>
@@ -334,13 +334,13 @@ function legend() {
   box.innerHTML = (mode === "growth" ? "<span>Households 2021 ÷ 1086:</span>" : "<span>Households 1086:</span>") + cl.map((c, i) => `<span><i style="background:var(${c[0]})"></i>${c[1]} (${fmt(n[i])})</span>`).join("") + `<span><i style="background:var(--gn)"></i>${mode === "growth" ? "No comparison" : "No figure"} (${fmt(none)})</span><span>Dot size = households in 1086</span>`;
 }
 function restyle() { const pal = palette(), z = lmap.getZoom(); markers.forEach(m => { const p = m.p; m.setStyle({ fillColor: colOf(p, pal), color: pal.bg, radius: rad(p, z) }); }); legend(); }
-function tileUrl() { return `https://{s}.basemaps.cartocdn.com/${isDark() ? "dark_all" : "light_all"}/{z}/{x}/{y}{r}.png`; }
+function tileUrl() { return `https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_${isDark() ? "Dark" : "Light"}_Gray_Base/MapServer/tile/{z}/{y}/{x}`; }
 (() => {
   if (!window.L) { document.getElementById("lmap").innerHTML = '<p style="padding:16px">The map library did not load.</p>'; return; }
   lmap = L.map("lmap", { preferCanvas: true, zoomSnap: 0.5, minZoom: 5, maxZoom: 15, scrollWheelZoom: false, worldCopyJump: false });
   const narrow = innerWidth < 600;
   lmap.fitBounds([[50.0, -5.6], [54.6, 1.8]], { padding: narrow ? [0, 0] : [10, 10] });
-  tiles = L.tileLayer(tileUrl(), { attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>', subdomains: "abcd", maxZoom: 19 }).addTo(lmap);
+  tiles = L.tileLayer(tileUrl(), { attribution: 'Tiles &copy; Esri, HERE, Garmin, &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, and the GIS user community', maxZoom: 16 }).addTo(lmap);
   const rend = L.canvas({ padding: 0.5, tolerance: 3 });
   const pal = palette(), z = lmap.getZoom();
   [...PL].sort((a, b) => (b.hh || 0) - (a.hh || 0)).forEach(p => {
